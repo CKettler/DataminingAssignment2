@@ -7,11 +7,11 @@ class DataAggregator:
     def __init__(self, filepath, window_size=5, variables=None):
         self.df = pd.read_csv(filepath)
         self.participants = self.df['site_id'].unique()  # all participants (don't know if needed)
-        if variables:
-            self.variables = variables
-        else:
-            self.variables = self.df['variable'].unique()  # all possible variables
+        self.variables = list(self.df.columns.values)  # all possible variable names
         print "data opened"
+
+    def read(self):
+        return self.df, self.variables
 '''
     def read(self, method='separate'):
         """

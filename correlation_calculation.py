@@ -5,6 +5,7 @@ correlation features and mood
 
 import data_processing as dr
 import numpy as np
+import csv
 import pandas as pd
 import scipy.stats as stats
 import matplotlib.pyplot as plt
@@ -12,63 +13,81 @@ import matplotlib.pyplot as plt
 data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 
 # the dataframe
-filepath = 'test_file1.csv'
+filepath = 'data/test_file1.csv'
+#filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
 data_aggregator = dr.DataAggregator(filepath)
+data, variables = data_aggregator.read()
 
-# data, target, participants, variables, datatime = data_aggregator.read(method='separate')
-# print data
-#
-# new_features = []
-# for features in data:
-#     if 0 in features:
-#         pass
-#     else:
-#         new_features.append(features)
-#
-# features = np.array(new_features)
-# rows,cols = features.shape
-#
-# corr_and_pvalue = []
-# name_array1 = []
-# name_array2 = []
-# k = 0
-# for i in range(0,cols):
-#     for j in range(k,cols):
-#         corr_and_pvalue.append(stats.spearmanr(features[:,i],features[:,j]))
-#         name_array1.append(variables[i])
-#         name_array2.append(variables[j])
-#     k = k+1
-#
-# # extract only the correlation
-# correlations = tuple(x[0] for x in corr_and_pvalue)
-#
-# # combine correlations and name_array in one 2-dimensional matrix, in which you can see
-# # which correlation belongs to which name
-# corr_names_pre = np.vstack((correlations, name_array1))
-# corr_names2 = np.vstack((corr_names_pre, name_array2)).T
-# corr_names2 = corr_names2[corr_names2[:,0].argsort(axis=0)]
-#
-#
-# neg_array = []
-# pos_array = []
-# for i in range(0,len(corr_names2)):
-#     if float(corr_names2[i,0]) < 0:
-#         neg_array.append(corr_names2[i,:])
-#     else:
-#         pos_array.append(corr_names2[i,:])
-#
-# neg_array_rev = neg_array[::-1]
-#
-# corr_names2 = np.vstack((neg_array_rev,pos_array))
-#
-# # plot the correlation against the number of the column of the feature
-# fig = plt.figure()
-# errax = fig.add_subplot(1, 1, 1)
-# errax.set_xlabel('features sorted from lowest correlation to highest correlation')
-# errax.set_ylabel('correlation coefficient')
-# errax.plot(corr_names2[:,0])
-# fig.savefig(data_path_figs + '/correlation_sorted_fig.png')
-# fig.show()
+#data, target, participants, variables, datatime = data_aggregator.read(method='separate')
+
+new_features = []
+for variable_name in variables:
+    if 'date_time' == variable_name:
+        pass
+    else:
+        a = np.array(data[variable_name])
+        new_features.append(np.transpose(a))
+
+
+
+
+
+features = np.array(new_features)
+rows, cols = features.shape
+print "rows"
+print rows
+print "cols"
+print cols
+
+corr_and_pvalue = []
+name_array1 = []
+name_array2 = []
+k = 0
+for i in range(0,rows):
+    for j in range(k,rows):
+        corr_and_pvalue.append(stats.spearmanr(features[i,:],features[j,:]))
+        name_array1.append(variables[i])
+        name_array2.append(variables[j])
+    k = k+1
+
+# extract only the correlation
+correlations = tuple(x[0] for x in corr_and_pvalue)
+
+# combine correlations and name_array in one 2-dimensional matrix, in which you can see
+# which correlation belongs to which name
+corr_names_pre = np.vstack((correlations, name_array1))
+corr_names2 = np.vstack((corr_names_pre, name_array2)).T
+corr_names2 = corr_names2[corr_names2[:,0].argsort(axis=0)]
+
+
+neg_array = []
+pos_array = []
+for i in range(0,len(corr_names2)):
+    if float(corr_names2[i,0]) < 0:
+        neg_array.append(corr_names2[i,:])
+    else:
+        pos_array.append(corr_names2[i,:])
+
+neg_array_rev = neg_array[::-1]
+
+corr_names2 = np.vstack((neg_array_rev,pos_array))
+
+# plot the correlation against the number of the column of the feature
+fig = plt.figure()
+errax = fig.add_subplot(1, 1, 1)
+errax.set_xlabel('features sorted from lowest correlation to highest correlation')
+errax.set_ylabel('correlation coefficient')
+errax.plot(corr_names2[:,0])
+fig.savefig(data_path_figs + '/correlation_sorted_fig.png')
+fig.show()
+
+names = open('correlation_names.txt', 'w')
+
+for values in corr_names2:
+    names.write(str(values) + '\n')
+
+names.close()
+
 '''
 count = 0
 for var in variables:
