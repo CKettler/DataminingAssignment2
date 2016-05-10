@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 
 # the dataframe
-filepath = 'data/test_file1.csv'
-#filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
+#filepath = 'data/test_file1.csv'
+filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
 data_aggregator = dr.DataAggregator(filepath)
 data, variables = data_aggregator.read()
 
