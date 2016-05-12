@@ -16,7 +16,7 @@ data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 #filepath = 'data/test_file1.csv'
 filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
 data_aggregator = dr.DataAggregator(filepath)
-data, variables = data_aggregator.read()
+data, variables, targets = data_aggregator.read()
 
 #data, target, participants, variables, datatime = data_aggregator.read(method='separate')
 
@@ -42,12 +42,15 @@ print cols
 corr_and_pvalue = []
 name_array1 = []
 name_array2 = []
+target_names = ['click_bool', 'booking_bool']
 k = 0
 for i in range(0,rows):
-    for j in range(k,rows):
-        corr_and_pvalue.append(stats.spearmanr(features[i,:],features[j,:]))
-        name_array1.append(variables[i])
-        name_array2.append(variables[j])
+    #for j in range(k,rows):
+    #corr_and_pvalue.append(stats.spearmanr(features[i,:],features[j,:]))
+    for j in range(2):
+        corr_and_pvalue.append(stats.spearmanr(features[i, :], targets[j]))
+        name_array1.append(variables[i+1])
+        name_array2.append(target_names[j])
     k = k+1
 
 # extract only the correlation

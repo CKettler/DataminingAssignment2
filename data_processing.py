@@ -16,7 +16,7 @@ class DataAggregator:
 
         print "data opened", datetime.now().time()
 
-    def read(self, method='some'):
+    def read(self, ):
         """
         Generates the aggregated data.
         There are a few possible variables.
@@ -26,7 +26,11 @@ class DataAggregator:
 
         if method == 'some':
             return self.window_some_features()
+        elif method == 'cor':
+            targets = [self.df['click_bool'], self.df['booking_bool']]
+            return self.df, self.variables, targets
 
+    method = 'cor'
     def all_data(self):
         data_frames_list = []
         targets = []
