@@ -75,8 +75,9 @@ class DataAggregator:
         #print "new cols created", datetime.now().time()
         #newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
         booking_properties_dict =  self.bookings_property()
-        booking_prop_array = self.feature_from_booking_properties(booking_properties_dict)
+        booking_prop_array, found_prop_array = self.feature_from_booking_properties(booking_properties_dict)
         self.df['no_bookings_prop'] = np.transpose(booking_prop_array)
+        self.df['no_found_prop'] = np.transpose(found_prop_array)
         print self.df
         #self.df = self.df.join(newcols)
         #print "new df joined", datetime.now().time()
@@ -116,15 +117,20 @@ class DataAggregator:
 
         return booking_properties_dict
 
+
     def feature_from_booking_properties(self, booking_properties_dict):
         rows, cols = self.df.shape
-        feature_array = np.zeros(rows)
+        feature_array_bookings = np.zeros(rows)
+        feature_array_found = np.zeros(rows)
         for key in booking_properties_dict:
             indexes_prop = self.df[self.df['prop_id'] == int(key)].index.tolist()
+            # number of times a property was found in the data = no_times_found
+            no_times_found = len(indexes_prop)
             for index in indexes_prop:
-                feature_array[index] = booking_properties_dict[key]
-        print feature_array
-        return feature_array
+                feature_array_bookings[index] = booking_properties_dict[key]
+                feature_array_found[index] = no_times_found
+        print feature_array_bookings, feature_array_found
+        return feature_array_bookings, feature_array_found
 
 
 
