@@ -16,7 +16,7 @@ class DataAggregator:
 
         print "data opened", datetime.now().time()
 
-    def read(self, ):
+    def read(self, method = 'cor'):
         """
         Generates the aggregated data.
         There are a few possible variables.
@@ -27,10 +27,10 @@ class DataAggregator:
         if method == 'some':
             return self.window_some_features()
         elif method == 'cor':
-            targets = [self.df['click_bool'], self.df['booking_bool']]
+            targets = [self.df['click_bool'], self.df['booking_bool'], self.df['target']]
             return self.df, self.variables, targets
 
-    method = 'cor'
+
     def all_data(self):
         data_frames_list = []
         targets = []
@@ -64,23 +64,22 @@ class DataAggregator:
         # self.df['comp_cheap'] = self.df.apply(lambda x: self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
         # self.df['target'] = self.df.apply(lambda x: int(x['click_bool']) + 4 * int(x['booking_bool']), axis=1)
 
-        #lambdafunc = lambda x: pd.Series([x['date_time'].hour / 6,
-        #                                  self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-        #                                  self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-        #                                  self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-        #                                  int(x['click_bool']) + 4 * int(x['booking_bool'])
-        #                                  ])
-        #print "lambdafunc created" ,datetime.now().time()
-        #newcols = self.df.apply(lambdafunc, axis=1)
-        #print "new cols created", datetime.now().time()
-        #newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
+        lambdafunc = lambda x: pd.Series([x['date_time'].hour / 6,
+                                         self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+                                         self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+                                         self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+                                         int(x['click_bool']) + 4 * int(x['booking_bool'])
+                                         ])
+        print "lambdafunc created" ,datetime.now().time()
+        newcols = self.df.apply(lambdafunc, axis=1)
+        print "new cols created", datetime.now().time()
+        newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
         booking_properties_dict =  self.bookings_property()
         booking_prop_array, found_prop_array = self.feature_from_booking_properties(booking_properties_dict)
         self.df['no_bookings_prop'] = np.transpose(booking_prop_array)
         self.df['no_found_prop'] = np.transpose(found_prop_array)
-        print self.df
-        #self.df = self.df.join(newcols)
-        #print "new df joined", datetime.now().time()
+        self.df = self.df.join(newcols)
+        print "new df joined", datetime.now().time()
 
     def comp_rate_calc(self, comps_list):
         result = np.sum(comps_list)
