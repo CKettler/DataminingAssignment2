@@ -10,7 +10,10 @@ import pandas as pd
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
-filepath = 'data/training_set_VU_DM_2014.csv'
+#filepath = 'data/training_set_VU_DM_2014.csv'
+filepath = 'data/test_file1.csv'
+#filepath = 'data/mega_small.csv'
+
 
 data_aggregator = dr.DataAggregator(filepath)
 

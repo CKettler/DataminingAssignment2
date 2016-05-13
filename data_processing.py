@@ -46,14 +46,14 @@ class DataAggregator:
             tf['comp_cheap'] = tf.apply(lambda x: self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
             tf['target'] = tf.apply(lambda x: int(x['click_bool'])+4*int(x['booking_bool']), axis=1)
             print tf.loc[:, ('time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target')]
-            some_feature_data = pd.concat([tf['site_id'], tf['visitor_location_country_id'], tf['prop_country_id'],
-                                           tf['prop_starrating'], tf['prop_brand_bool'], tf['price_usd']], axis=1,
-                                          keys=['id', 'location visitor', 'location prop', 'star rating', 'brand boolean', 'price usd'])
-            target = tf['click_bool']
-            data_frames_list.append(some_feature_data)
-            targets.append(target)
+            # some_feature_data = pd.concat([tf['site_id'], tf['visitor_location_country_id'], tf['prop_country_id'],
+            #                                tf['prop_starrating'], tf['prop_brand_bool'], tf['price_usd']], axis=1,
+            #                               keys=['id', 'location visitor', 'location prop', 'star rating', 'brand boolean', 'price usd'])
+            # target = tf['click_bool']
+            # data_frames_list.append(some_feature_data)
+            # targets.append(target)
 
-        return data_frames_list, targets
+        #return data_frames_list, targets
 
     def add_data(self):
         # self.df['time_class'] = self.df.apply(lambda x: x['date_time'].hour / 6, axis=1)
@@ -64,19 +64,22 @@ class DataAggregator:
         # self.df['comp_cheap'] = self.df.apply(lambda x: self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
         # self.df['target'] = self.df.apply(lambda x: int(x['click_bool']) + 4 * int(x['booking_bool']), axis=1)
 
-        lambdafunc = lambda x: pd.Series([x['date_time'].hour / 6,
-                                          self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                          self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                          self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                          int(x['click_bool']) + 4 * int(x['booking_bool'])
-                                          ])
-        print "lambdafunc created" ,datetime.now().time()
-        newcols = self.df.apply(lambdafunc, axis=1)
-        print "new cols created", datetime.now().time()
-        newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
-
-        self.df = self.df.join(newcols)
-        print "new df joined", datetime.now().time()
+        #lambdafunc = lambda x: pd.Series([x['date_time'].hour / 6,
+        #                                  self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+        #                                  self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+        #                                  self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
+        #                                  int(x['click_bool']) + 4 * int(x['booking_bool'])
+        #                                  ])
+        #print "lambdafunc created" ,datetime.now().time()
+        #newcols = self.df.apply(lambdafunc, axis=1)
+        #print "new cols created", datetime.now().time()
+        #newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
+        booking_properties_dict =  self.bookings_property()
+        booking_prop_array = self.feature_from_booking_properties(booking_properties_dict)
+        self.df['no_bookings_prop'] = np.transpose(booking_prop_array)
+        print self.df
+        #self.df = self.df.join(newcols)
+        #print "new df joined", datetime.now().time()
 
     def comp_rate_calc(self, comps_list):
         result = np.sum(comps_list)
@@ -93,4 +96,35 @@ class DataAggregator:
     def window_some_features(self):
         data_frames_list, targets = self.all_data()
         return data_frames_list, targets
+
+    def bookings_property(self):
+        # creates dictionary of hotels, returning 123(number hotel): 3(number counts)
+        booking_properties_dict = {}
+        rows, cols = self.df.shape
+        for i in range(0,rows):
+            if self.df['booking_bool'][i] == 1:
+                property_id = self.df['prop_id'][i]
+                print 'prop_id'
+                print property_id
+                if str(property_id) in booking_properties_dict:
+                    booking_properties_dict[str(property_id)] += 1
+                else:
+                    booking_properties_dict[str(property_id)] = 1
+
+        print 'dictionary'
+        print booking_properties_dict
+
+        return booking_properties_dict
+
+    def feature_from_booking_properties(self, booking_properties_dict):
+        rows, cols = self.df.shape
+        feature_array = np.zeros(rows)
+        for key in booking_properties_dict:
+            indexes_prop = self.df[self.df['prop_id'] == int(key)].index.tolist()
+            for index in indexes_prop:
+                feature_array[index] = booking_properties_dict[key]
+        print feature_array
+        return feature_array
+
+
 
