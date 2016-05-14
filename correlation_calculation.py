@@ -22,7 +22,7 @@ data, variables, targets = data_aggregator.read()
 for sample in range(0,2):
     # here the data gets sampled
     data, targets = ds.sampling(data, targets)
-
+    break
     new_features = []
     for variable_name in variables:
         if 'date_time' == variable_name:
@@ -30,9 +30,6 @@ for sample in range(0,2):
         else:
             a = np.array(data[variable_name])
             new_features.append(np.transpose(a))
-
-
-
 
 
     features = np.array(new_features)
