@@ -9,6 +9,7 @@ class DataAggregator:
         print "start the process", datetime.now().time()
         dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m-%d %H:%M:%S')
         self.df = pd.read_csv(filepath, parse_dates=['date_time'], date_parser=dateparse)
+        print "num rows:", len(self.df)
         self.df[['comp%d_rate' % i for i in range(1, 9)]] = self.df[['comp%d_rate' % i for i in range(1, 9)]].fillna(axis=1, method='backfill')
         self.site_id = self.df['site_id'].unique()  # all participants (don't know if needed)
         self.variables = list(self.df.columns.values)  # all possible variable names
