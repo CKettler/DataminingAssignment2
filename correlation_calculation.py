@@ -3,7 +3,7 @@
 correlation features and mood
 """
 
-import data_processing as dr
+import data_preprocessing as dp
 import data_sampling as ds
 import numpy as np
 import csv
@@ -17,8 +17,8 @@ data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 # filepath = 'data/test_file1.csv'
 # filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
 filepath = 'data/added_variables.csv'
-data_aggregator = dr.DataAggregator(filepath)
-data, variables, targets = data_aggregator.read()
+data_aggregator = dp.DataPreprocessing(filepath)
+data, variables, targets = data_aggregator.read( method = 'cor')
 for sample in range(0,2):
     # here the data gets sampled
     data = ds.sampling(data)

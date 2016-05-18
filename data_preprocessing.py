@@ -4,7 +4,7 @@ import numpy as np
 import math
 
 
-class DataAggregator:
+class DataPreprocessing:
     def __init__(self, filepath, window_size=5, variables=None):
         print "start the process", datetime.now().time()
         dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m-%d %H:%M:%S')
@@ -17,7 +17,7 @@ class DataAggregator:
 
         print "data opened", datetime.now().time()
 
-    def read(self, method = 'cor'):
+    def read(self, method = 'some'):
         """
         Generates the aggregated data.
         There are a few possible variables.

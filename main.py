@@ -2,7 +2,7 @@
 main run file
 """
 
-import data_processing as dr
+import data_aggregator as dr
 from datetime import datetime
 import numpy as np
 import csv
