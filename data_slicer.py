@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def slicer(df, n_slices, outputfiles='data/data_slice_%d.csv'):
+def slicer(df, n_slices, max_num_slices=None, outputfiles='data/data_slice_%d.csv'):
     srch_ids = df['srch_id'].unique()
     num_ids = len(srch_ids)
     rows_per_slice = int(round(num_ids / float(n_slices)))
@@ -15,4 +15,6 @@ def slicer(df, n_slices, outputfiles='data/data_slice_%d.csv'):
                 tf = df.loc[mask]
                 new_df = new_df.append(tf)
             rows += 1
+        if max_num_slices and max_num_slices <= slice_x:
+            break
         new_df.to_csv(outputfiles % (slice_x + 1))
