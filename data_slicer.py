@@ -1,22 +1,18 @@
-import numpy as np
-import random
 import pandas as pd
-import data_aggregator as da
 
 
-def slicer(df, n_slices):
-    k = 0
-    rows = 0
-    random_integers = []
+def slicer(df, n_slices, outputfiles='data/data_slice_%d.csv'):
     srch_ids = df['srch_id'].unique()
-    print srch_ids
-    while rows < 2000:
-       rows = 2001
-
-
-
-
-filepath = 'data/test_file1.csv'
-data = da.DataAggregator(filepath)
-slicer(data.df, 10)
-
+    num_ids = len(srch_ids)
+    rows_per_slice = int(round(num_ids / float(n_slices)))
+    for slice_x in range(0, n_slices):
+        new_df = pd.DataFrame()
+        rows = 1
+        while rows <= rows_per_slice:
+            cur_row = rows_per_slice * slice_x + rows
+            if cur_row < num_ids:
+                mask = (df['srch_id'] == srch_ids[cur_row])
+                tf = df.loc[mask]
+                new_df = new_df.append(tf)
+            rows += 1
+        new_df.to_csv(outputfiles % (slice_x + 1))
