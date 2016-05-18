@@ -45,7 +45,7 @@ class DataPreprocessing:
             tf['comp_rate_sum'] = tf.apply(lambda x: self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
             tf['comp_expensive'] = tf.apply(lambda x: self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
             tf['comp_cheap'] = tf.apply(lambda x: self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]), axis=1)
-            tf['target'] = tf.apply(lambda x: int(x['click_bool'])+4*int(x['booking_bool']), axis=1)
+            tf['target'] = tf.apply(lambda x: int(x['click_bool'])+5*int(x['booking_bool']), axis=1)
             print tf.loc[:, ('time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target')]
             # some_feature_data = pd.concat([tf['site_id'], tf['visitor_location_country_id'], tf['prop_country_id'],
             #                                tf['prop_starrating'], tf['prop_brand_bool'], tf['price_usd']], axis=1,
@@ -69,7 +69,7 @@ class DataPreprocessing:
                                          self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
                                          self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
                                          self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                         int(x['click_bool']) + 4 * int(x['booking_bool'])
+                                         int(x['click_bool']) + 5 * int(x['booking_bool'])
                                          ])
         print "lambdafunc created" ,datetime.now().time()
         newcols = self.df.apply(lambdafunc, axis=1)
