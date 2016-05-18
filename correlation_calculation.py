@@ -21,7 +21,8 @@ data_aggregator = dr.DataAggregator(filepath)
 data, variables, targets = data_aggregator.read()
 for sample in range(0,2):
     # here the data gets sampled
-    data, targets = ds.sampling(data, targets)
+    data = ds.sampling(data)
+
     break
     new_features = []
     for variable_name in variables:
