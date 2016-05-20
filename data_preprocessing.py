@@ -36,7 +36,8 @@ class DataPreprocessing(DataAggregator):
                                          self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
                                          int(x['click_bool']) + 5 * int(x['booking_bool'])
                                          ])
-        print "lambdafunc created" ,datetime.now().time()
+
+        print "lambdafunc created", datetime.now().time()
         newcols = self.df.apply(lambdafunc, axis=1)
         print "new cols created", datetime.now().time()
         newcols.columns = ['time_class', 'comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
