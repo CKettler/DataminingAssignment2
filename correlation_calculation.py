@@ -4,6 +4,7 @@ correlation features and mood
 """
 
 import data_preprocessing as dp
+import data_aggregator as da
 import data_sampling as ds
 import numpy as np
 import csv
@@ -16,14 +17,18 @@ data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 # the dataframe
 # filepath = 'data/test_file1.csv'
 # filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
-filepath = 'data/added_variables.csv'
-data_aggregator = dp.DataPreprocessing(filepath)
-data, variables, targets = data_aggregator.read( method = 'cor')
-for sample in range(0,2):
-    # here the data gets sampled
-    data = ds.sampling(data)
+filepath = 'data/data_slice_1_added_variables.csv'
+data_aggregator = da.DataAggregator(filepath)
+data_aggregator.read_data()
+df = data_aggregator.df
+targets = [df['click_bool'], df['booking_bool'], df['target']]
+variables = list(df.columns.values)
 
-    break
+for sample in range(0,1):
+    # here the data gets sampled
+    #data = ds.sampling(df)
+
+    data = df
     new_features = []
     for variable_name in variables:
         if 'date_time' == variable_name:
@@ -43,12 +48,12 @@ for sample in range(0,2):
     corr_and_pvalue = []
     name_array1 = []
     name_array2 = []
-    target_names = ['click_bool', 'booking_bool', 'self_made_target']
+    target_names = ['click_bool', 'booking_bool', 'target']
     k = 0
     for i in range(0,rows):
         #for j in range(k,rows):
         #corr_and_pvalue.append(stats.spearmanr(features[i,:],features[j,:]))
-        for j in range(2):
+        for j in range(3):
             corr_and_pvalue.append(stats.spearmanr(features[i, :], targets[j]))
             name_array1.append(variables[i+1])
             name_array2.append(target_names[j])
@@ -58,13 +63,44 @@ for sample in range(0,2):
     correlation_sample = tuple(x[0] for x in corr_and_pvalue)
     if sample == 0:
         correlations = correlation_sample
+        correlations_list = correlation_sample
     else:
-        correlations = np.vstack((correlations, correlation_sample))
-        print correlations
+        correlations_list = np.vstack((correlations_list, correlation_sample))
+
+    corr_names_pre = np.vstack((correlations, name_array1))
+    corr_names2 = np.vstack((corr_names_pre, name_array2)).T
+    corr_names2 = corr_names2[corr_names2[:, 0].argsort(axis=0)]
+
+    neg_array = []
+    pos_array = []
+    for i in range(0, len(corr_names2)):
+        if float(corr_names2[i, 0]) < 0:
+            neg_array.append(corr_names2[i, :])
+        else:
+            pos_array.append(corr_names2[i, :])
+
+    neg_array_rev = neg_array[::-1]
+
+    corr_names2 = np.vstack((neg_array_rev, pos_array))
+
+    # plot the correlation against the number of the column of the feature
+    fig = plt.figure()
+    errax = fig.add_subplot(1, 1, 1)
+    errax.set_xlabel('features sorted from lowest correlation to highest correlation')
+    errax.set_ylabel('correlation coefficient')
+    errax.plot(corr_names2[:, 0])
+    fig.savefig(data_path_figs + '/correlation_sorted_fig_%d.png'%(sample))
+    fig.show()
+
+    names = open('correlation_names_%d.txt'%(sample), 'w')
+
+    for values in corr_names2:
+        names.write(str(values) + '\n')
+
+    names.close()
 
 # calculate the mean of the correlation of the samples
-#print correlations
-mean_cors = np.mean(np.transpose(correlations),axis=1)
+mean_cors = np.mean(np.transpose(correlations_list),axis=1)
 print mean_cors
 
 # combine correlations and name_array in one 2-dimensional matrix, in which you can see
@@ -92,10 +128,10 @@ errax = fig.add_subplot(1, 1, 1)
 errax.set_xlabel('features sorted from lowest correlation to highest correlation')
 errax.set_ylabel('correlation coefficient')
 errax.plot(corr_names2[:,0])
-fig.savefig(data_path_figs + '/correlation_sorted_fig.png')
+fig.savefig(data_path_figs + '/correlation_sorted_fig_all.png')
 fig.show()
 
-names = open('correlation_names.txt', 'w')
+names = open('correlation_names_all.txt', 'w')
 
 for values in corr_names2:
     names.write(str(values) + '\n')
