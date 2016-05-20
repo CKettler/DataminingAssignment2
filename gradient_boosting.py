@@ -23,7 +23,7 @@ X_train = traindf.as_matrix(select_cols)
 print X_train
 print y_train
 
-original_params = {'n_estimators': 1000, 'max_leaf_nodes': 4, 'max_depth': None, 'random_state': 2,
+original_params = {'n_estimators': 10, 'max_leaf_nodes': 4, 'max_depth': None, 'random_state': 2,
                    'min_samples_split': 5}
 
 for label, color, setting in [('No shrinkage', 'orange',
@@ -45,6 +45,7 @@ for label, color, setting in [('No shrinkage', 'orange',
     print "trained in", datetime.now() - start_time
 
     y_pred = clf.predict(X_train)
+    print "class probs", clf.predict_proba(X_train)
     print "classes found", np.unique(y_pred)
     print "accuracy:", clf.score(X_train, y_train)
     print "recall macro:", recall_score(y_train, y_pred, average='macro')
