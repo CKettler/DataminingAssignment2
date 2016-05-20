@@ -24,5 +24,8 @@ class DataAggregator:
         # print self.variables
         print "data opened in ", datetime.now() - start_time
 
-    def select_variables(self, variables):
+    def keep_df_variables(self, variables):
         self.df = self.df[variables]
+
+    def select_variables(self, variables):
+        return self.df[variables]
