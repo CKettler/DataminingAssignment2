@@ -7,6 +7,10 @@ import math
 class DataAggregator:
     def __init__(self, filepath, window_size=5, variables=None):
         self.filepath = filepath
+        self.df = pd.DataFrame()
+        self.num_rows = 0
+        self.site_ids = []
+        self.variables = []
 
     def read_data(self):
         start_time = datetime.now()
@@ -15,7 +19,10 @@ class DataAggregator:
         self.num_rows = len(self.df)
         print "num rows:", self.num_rows
         self.df[['comp%d_rate' % i for i in range(1, 9)]] = self.df[['comp%d_rate' % i for i in range(1, 9)]].fillna(axis=1, method='backfill')
-        self.site_id = self.df['site_id'].unique()  # all participants (don't know if needed)
+        self.site_ids = self.df['site_id'].unique()  # all participants (don't know if needed)
         self.variables = list(self.df.columns.values)  # all possible variable names
-        print self.variables
+        # print self.variables
         print "data opened in ", datetime.now() - start_time
+
+    def select_variables(self, variables):
+        self.df = self.df[variables]
