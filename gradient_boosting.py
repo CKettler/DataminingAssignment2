@@ -1,4 +1,5 @@
 import data_aggregator as da
+import ranking as rk
 from sklearn import ensemble
 from datetime import datetime
 from sklearn.metrics import *
@@ -6,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 
-filepath = 'data/data_slice_1_added_variables.csv'
+filepath = 'C:\Users\Celeste\Documents\GitHub\DataminingAssignment2\data\data_slice_1_added_variables.csv'
 data = da.DataAggregator(filepath)
 data.read_data()
 
@@ -45,10 +46,13 @@ for label, color, setting in [('No shrinkage', 'orange',
     print "trained in", datetime.now() - start_time
 
     y_pred = clf.predict(X_train)
-    print "class probs", clf.predict_proba(X_train)
+    y_prob = clf.predict_proba(X_train)
+    print "class probs", y_prob
     print "classes found", np.unique(y_pred)
     print "accuracy:", clf.score(X_train, y_train)
     print "recall macro:", recall_score(y_train, y_pred, average='macro')
     print "recall micro:", recall_score(y_train, y_pred, average='micro')
     print "f1 macro:", f1_score(y_train, y_pred, average='macro')
     print "f1 micro:", f1_score(y_train, y_pred, average='micro')
+
+    df_with_ranking = rk.ranking(traindf, y_pred, y_prob)

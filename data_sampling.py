@@ -7,9 +7,10 @@ def sampling(df):
     k = 0
     rows = 0
     random_integers = []
+    search_ids = df['srch_id']
+    number_srch_ids = len(search_ids.drop_duplicates())
     while rows < 2000:
-        # 365 wordt 365000
-        new_random_integer = random.sample(xrange(1, 365), 1)
+        new_random_integer = random.sample(xrange(1, number_srch_ids), 1)
         while new_random_integer in random_integers:
             new_random_integer = random.sample(xrange(1, 365), 1)
         random_integers = np.append(random_integers, new_random_integer)
