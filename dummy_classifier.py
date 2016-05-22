@@ -10,6 +10,7 @@ def classification(data_matrix, target_matrix, test_matrix, strategy = 'most_fre
     print "model made", datetime.now().time()
     model.fit(data_matrix, target_matrix)
     print "model fitted", datetime.now().time()
+    #Can not find/understand what is going wrong with predict
     results = model.predict(test_matrix)
     print results
 
