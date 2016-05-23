@@ -55,5 +55,6 @@ for label, color, setting in [('No shrinkage', 'orange',
     print "f1 macro:", f1_score(y_train, y_pred, average='macro')
     print "f1 micro:", f1_score(y_train, y_pred, average='micro')
 
+    print traindf
     df_with_ranking = rk.ranking(traindf, y_pred, y_prob)
     df_with_ranking.to_csv("data/rankings_data_slice_1")
