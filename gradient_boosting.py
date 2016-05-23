@@ -1,5 +1,6 @@
 import data_aggregator as da
 import ranking as rk
+import ndcg_calculation as ndcg
 from sklearn import ensemble
 from datetime import datetime
 from sklearn.metrics import *
@@ -55,6 +56,15 @@ for label, color, setting in [('No shrinkage', 'orange',
     print "f1 macro:", f1_score(y_train, y_pred, average='macro')
     print "f1 micro:", f1_score(y_train, y_pred, average='micro')
 
-    print traindf
     df_with_ranking = rk.ranking(traindf, y_pred, y_prob)
-    df_with_ranking.to_csv("data/rankings_data_slice_1")
+
+    search_ids = df_with_ranking['srch_id']
+    diff_search_ids = search_ids.drop_duplicates()
+
+    k = 0
+
+    for id in diff_search_ids:
+        mask = (df_with_ranking['srch_id'] == id)
+        result_df = df_with_ranking.loc[mask]
+        ndcg.ndcg(result_df, k)
+
