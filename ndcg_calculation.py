@@ -27,6 +27,7 @@ def ndcg(result_df,k):
     print sorted_result_df
     #print sorted_result_list
     for i in range(len(result_df)):
+        print result_df['target'][i]
         relevance_rank = result_df['target'][i]
         if i > k:
             break
@@ -36,11 +37,10 @@ def ndcg(result_df,k):
         relevance_i_rank = result_df['target'][j]
         if j > k:
             break
-        dcgi_rank = ((2**(relevance_i_rank))-1)/(math.log(1+(1+j),2))
+        dcgi_rank = ((2**relevance_i_rank)-1)/(math.log(1+(1+j),2))
         dcgi_list.append(dcgi_rank)
     dcgp = sum(dcg_list)
     dcgi = sum(dcgi_list)
     ndcg = dcgp/dcgi
     print ndcg
     return ndcg
-
