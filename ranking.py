@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def ranking(df, y_pred, y_prob):
-    df = df[['srch_id','prop_id']]
+    df = df[['srch_id','prop_id','target']]
     df['y_pred'] = y_pred
     df['y_prob_0'] = y_prob[:,0]
     df['y_prob_1'] = y_prob[:,1]
@@ -29,7 +29,7 @@ def ranking(df, y_pred, y_prob):
         else:
             result = tf
             result['ranking'] = 1
-        rank = result[['ranking','srch_id','prop_id']]
+        rank = result[['ranking','srch_id','prop_id','target']]
         if k != 0:
             df_list = [new_df, rank]
             new_df = pd.concat(df_list)
