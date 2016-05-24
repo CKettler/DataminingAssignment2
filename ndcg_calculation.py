@@ -12,29 +12,18 @@ from datetime import datetime
 def ndcg(result_df,k):
     dcg_list = []
     dcgi_list = []
-    # mask = (result_df['target'] == 6)
-    # booked_df = result_df.loc[mask]
-    # booked_df['discounted_score'] = 5 * np.ones(len(booked_df))
-    # mask = (result_df['target'] == 1)
-    # clicked_df = result_df.loc[mask]
-    # clicked_df['discounted_score'] = np.ones(len(booked_df))
-    # sorted_result_list = pd.concat([booked_df, clicked_df])
-    # mask = (result_df['target'] == 0)
-    # rest_df = result_df.loc[mask]
-    # rest_df['discounted_score'] = np.ones(len(booked_df))
-    # sorted_result_list = pd.concat([rest_df, sorted_result_list])
     sorted_result_df = result_df.sort_values(by=['target'], ascending=False)
-    print sorted_result_df
-    #print sorted_result_list
-    for i in range(len(result_df)):
-        print result_df['target'][i]
-        relevance_rank = result_df['target'][i]
+    result_matrix = result_df.as_matrix(['target'])
+    sorted_result_matrix = sorted_result_df.as_matrix(['target'])
+    for i in range(len(result_matrix)):
+        print result_matrix[i]
+        relevance_rank = result_matrix[i]
         if i > k:
             break
         dcg_rank = ((2**(relevance_rank))-1)/(math.log(1+(1+i),2))
         dcg_list.append(dcg_rank)
-    for j in range(len(sorted_result_df)):
-        relevance_i_rank = result_df['target'][j]
+    for j in range(len(sorted_result_matrix)):
+        relevance_i_rank = sorted_result_matrix[j]
         if j > k:
             break
         dcgi_rank = ((2**relevance_i_rank)-1)/(math.log(1+(1+j),2))
