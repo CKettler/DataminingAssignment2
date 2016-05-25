@@ -12,12 +12,14 @@ filepathTrain = 'data\data_slice_1_added_variables.csv'
 filepathTest = 'data\data_slice_2_added_variables.csv'
 data = da.DataAggregator(filepathTrain)
 data.read_data(remove_nan=True)
+data_test = da.DataAggregator(filepathTest)
+data_test.read_data(remove_nan=True)
 
 
 def make_X_y(traindf, select_cols):
-    y_train = traindf.as_matrix(['target'])[:, 0]
-    X_train = traindf.as_matrix(select_cols)
-    return X_train, y_train
+    y = traindf.as_matrix(['target'])[:, 0]
+    X = traindf.as_matrix(select_cols)
+    return X, y
 
 
 select_cols = ['visitor_location_country_id', 'visitor_hist_starrating', 'visitor_hist_adr_usd', 'prop_country_id',
@@ -31,6 +33,8 @@ traindf = data.df.query("click_bool == 1")
 traindf = pd.concat([traindf, data.df.head(len(traindf))])
 X_train_boosted, y_train_boosted = make_X_y(traindf, select_cols)
 X_train_normal, y_train_normal = make_X_y(data.df, select_cols)
+
+X_test, y_test = make_X_y(data_test.df, select_cols)
 
 testSettings = [{'method': 'gradient_boosting',
                  'original_params': {'n_estimators': 10, 'max_leaf_nodes': 4, 'max_depth': None, 'random_state': 2,
@@ -68,16 +72,16 @@ for test in testSettings:
             start_time = datetime.now()
             clf.fit(X_train, y_train)
             print "\ttrained in", datetime.now() - start_time, "using settings:", params
-            y_pred = clf.predict(X_train)
-            y_prob = clf.predict_proba(X_train)
+            y_pred = clf.predict(X_test)
+            y_prob = clf.predict_proba(X_test)
             print "\tclasses found", np.unique(y_pred)
-            print "\taccuracy:", clf.score(X_train, y_train)
-            print "\trecall macro:", recall_score(y_train, y_pred, average='macro')
-            print "\trecall micro:", recall_score(y_train, y_pred, average='micro')
-            print "\tf1 macro:", f1_score(y_train, y_pred, average='macro')
-            print "\tf1 micro:", f1_score(y_train, y_pred, average='micro')
+            print "\taccuracy:", clf.score(X_test, y_test)
+            print "\trecall macro:", recall_score(y_test, y_pred, average='macro')
+            print "\trecall micro:", recall_score(y_test, y_pred, average='micro')
+            print "\tf1 macro:", f1_score(y_test, y_pred, average='macro')
+            print "\tf1 micro:", f1_score(y_test, y_pred, average='micro')
 
-            df_with_ranking = rk.ranking(df, y_pred, y_prob)
+            df_with_ranking = rk.ranking(data_test.df, y_pred, y_prob)
 
             search_ids = df_with_ranking['srch_id']
             diff_search_ids = search_ids.drop_duplicates()
@@ -88,5 +92,7 @@ for test in testSettings:
             for id in diff_search_ids:
                 mask = (df_with_ranking['srch_id'] == id)
                 result_df = df_with_ranking.loc[mask]
-                ndcg = ndcg.ndcg(result_df, k)
-                ndcg_list.append([ndcg])
+                ndcg_result = ndcg.ndcg(result_df)
+                ndcg_list.append(ndcg_result)
+
+            print "mean ndcg",sum(ndcg_list)/float(len(ndcg_list))

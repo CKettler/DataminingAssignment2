@@ -17,7 +17,6 @@ def ndcg(result_df):
     sorted_result_matrix = sorted_result_df.as_matrix(['target'])
     for i in range(len(result_matrix)):
         [relevance_rank] = result_matrix[i]
-        print relevance_rank
         dcg_rank = ((2**(relevance_rank))-1)/(math.log(1+(1+i),2))
         dcg_list.append(dcg_rank)
     for j in range(len(sorted_result_matrix)):
