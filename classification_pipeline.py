@@ -9,7 +9,6 @@ import pandas as pd
 import numpy as np
 import pickle as pkl
 
-
 boost_click = True
 filepathTrain = 'data\data_slice_1_added_variables.csv'
 filepathTest = 'data\data_slice_2_added_variables.csv'
@@ -47,20 +46,24 @@ testSettings = [{'method': 'gradient_boosting',
                                     {'learning_rate': 1.0, 'subsample': 0.5},
                                     {'learning_rate': 0.1, 'subsample': 0.5},
                                     {'learning_rate': 0.1, 'max_features': 2},
-                                    {'n_estimators':100, 'learning_rate': 1.0, 'subsample': 1.0},
-                                    {'n_estimators':100, 'learning_rate': 0.1, 'subsample': 1.0},
-                                    {'n_estimators':100, 'learning_rate': 1.0, 'subsample': 0.5},
-                                    {'n_estimators':100, 'learning_rate': 0.1, 'subsample': 0.5},
-                                    {'n_estimators':100, 'learning_rate': 0.1, 'max_features': 2}]
+                                    {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 1.0},
+                                    {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 1.0},
+                                    {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 0.5},
+                                    {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 0.5},
+                                    {'n_estimators': 100, 'learning_rate': 0.1, 'max_features': 2}]
                  },
                 {'method': 'adaboost',
                  'original_params': {'n_estimators': 1000, 'learning_rate ': 1},
-                 'param_variants': [{'learning_rate':0.5},
+                 'param_variants': [{'learning_rate': 0.5},
                                     {'learning_rate': 0.5},
                                     {'learning_rate': 0.1},
-                                    {'n_estimators':100, 'learning_rate':0.5},
-                                    {'n_estimators':100, 'learning_rate': 0.5},
-                                    {'n_estimators':100, 'learning_rate': 0.1}]
+                                    {'n_estimators': 100, 'learning_rate': 0.5},
+                                    {'n_estimators': 100, 'learning_rate': 0.5},
+                                    {'n_estimators': 100, 'learning_rate': 0.1}]
+                 },
+                {'method': 'randomforest',
+                 'original_params': {'n_estimators': 1000},
+                 'param_variants': [{'n_estimators': 1000}, {'n_estimators': 100}]
                  },
                 {'method': 'dummy',
                  'original_params': {},
@@ -70,7 +73,8 @@ testSettings = [{'method': 'gradient_boosting',
 
 f = open('classif-%s.csv' % (datetime.now().strftime("%d%m%y%H%M%S")), 'w')
 # f = open('classification_results.csv', 'w')
-f.write('method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg\n')
+f.write(
+    'method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg\n')
 for test in testSettings:
     original_params = test['original_params']
     settings = test['param_variants']
@@ -85,6 +89,8 @@ for test in testSettings:
             clf = ensemble.GradientBoostingClassifier(**params)
         elif test['method'] == 'adaboost':
             clf = ensemble.AdaBoostClassifier(**params)
+        elif test['method'] == 'randomforests':
+            clf = ensemble.RandomForestClassifier(**params)
         elif test['method'] == 'dummy':
             clf = dummy.DummyClassifier(strategy='most_frequent', random_state=None, constant=None)
 
@@ -142,7 +148,8 @@ for test in testSettings:
 
                 meanndcg = sum(ndcg_list) / float(len(ndcg_list))
                 f.write('%s; %s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
-                    test['method'], str(boosting), str(params), str(preshuffle), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
+                    test['method'], str(boosting), str(params), str(preshuffle), str(traintime), accuracy, recallmacro,
+                    recallmicro, f1macro,
                     f1micro, meanndcg))
 
                 print "\tmean ndcg", meanndcg
