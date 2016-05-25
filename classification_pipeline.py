@@ -58,8 +58,13 @@ testSettings = [{'method': 'gradient_boosting',
                                     {'n_estimators': 100, 'learning_rate': 0.1}]
                  },
                 {'method': 'randomforest',
-                 'original_params': {'n_estimators': 1000},
-                 'param_variants': [{'n_estimators': 1000}, {'n_estimators': 100}]
+                 'original_params': {'n_estimators': 10, 'max_depth': None},
+                 'param_variants': [{'n_estimators': 1000, 'max_depth': None},
+                                    {'n_estimators': 1000, 'max_depth': 1000},
+                                    {'n_estimators': 1000, 'max_depth': 500},
+                                    {'n_estimators': 100, 'max_depth': None},
+                                    {'n_estimators': 100, 'max_depth': 1000},
+                                    {'n_estimators': 100, 'max_depth': 1000}]
                  },
                 {'method': 'dummy',
                  'original_params': {},
