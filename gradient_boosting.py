@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 
-filepath = 'C:\Users\Celeste\Documents\GitHub\DataminingAssignment2\data\data_slice_1_added_variables.csv'
+filepath = 'data/data_slice_1_added_variables.csv'
 data = da.DataAggregator(filepath)
 data.read_data()
 
@@ -61,12 +61,12 @@ for label, color, setting in [('No shrinkage', 'orange',
     search_ids = df_with_ranking['srch_id']
     diff_search_ids = search_ids.drop_duplicates()
 
-    k = 0
     ndcg_list = []
 
     for id in diff_search_ids:
         mask = (df_with_ranking['srch_id'] == id)
         result_df = df_with_ranking.loc[mask]
-        ndcg = ndcg.ndcg(result_df, k)
-        ndcg_list.append([ndcg])
+        ndcg_result = ndcg.ndcg(result_df)
+        ndcg_list.append([ndcg_result])
 
+    print ndcg_list

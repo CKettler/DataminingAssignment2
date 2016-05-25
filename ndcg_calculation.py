@@ -9,7 +9,7 @@ from datetime import datetime
 #It is sorted, to create the list for DCGi
 #Then both DCG and DCGi are calculated for all documents
 #DCG is divided by DCGi which results in nDCG
-def ndcg(result_df,k):
+def ndcg(result_df):
     dcg_list = []
     dcgi_list = []
     sorted_result_df = result_df.sort_values(by=['target'], ascending=False)
@@ -18,17 +18,13 @@ def ndcg(result_df,k):
     for i in range(len(result_matrix)):
         [relevance_rank] = result_matrix[i]
         print relevance_rank
-        if i > k:
-            break
         dcg_rank = ((2**(relevance_rank))-1)/(math.log(1+(1+i),2))
         dcg_list.append(dcg_rank)
     for j in range(len(sorted_result_matrix)):
         relevance_i_rank = sorted_result_matrix[j]
-        if j > k:
-            break
         dcgi_rank = ((2**relevance_i_rank)-1)/(math.log(1+(1+j),2))
         dcgi_list.append(dcgi_rank)
     dcgp = sum(dcg_list)
     dcgi = sum(dcgi_list)
-    ndcg = dcgp/dcgi
+    [ndcg] = dcgp/dcgi
     return ndcg
