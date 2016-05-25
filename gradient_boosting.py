@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 
-filepath = 'C:\Users\Celeste\Documents\GitHub\DataminingAssignment2\data\data_slice_1_added_variables.csv'
+filepath = 'data\data_slice_1_added_variables.csv'
 data = da.DataAggregator(filepath)
 data.read_data()
 
@@ -19,8 +19,6 @@ traindf = pd.concat([traindf, data.df.head(clickedlen)])
 print data.variables
 y_train = traindf.as_matrix(['target'])[:,0]
 select_cols = ['visitor_location_country_id', 'visitor_hist_starrating', 'visitor_hist_adr_usd', 'prop_country_id', 'prop_id', 'prop_starrating', 'prop_review_score', 'prop_brand_bool', 'prop_location_score1', 'prop_location_score2', 'prop_log_historical_price', 'position', 'price_usd', 'promotion_flag', 'srch_destination_id', 'srch_length_of_stay', 'srch_booking_window', 'srch_adults_count', 'srch_children_count', 'srch_room_count', 'srch_saturday_night_bool', 'srch_query_affinity_score', 'orig_destination_distance']
-# data.keep_df_variables(select_cols)
-traindf = traindf.fillna(0)
 X_train = traindf.as_matrix(select_cols)
 print X_train
 print y_train
