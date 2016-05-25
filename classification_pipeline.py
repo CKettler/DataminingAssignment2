@@ -121,23 +121,28 @@ for test in testSettings:
             f1micro = f1_score(y_test, y_pred, average='micro')
             print "\tf1 micro:", f1micro
 
-            df_with_ranking = rk.ranking(data_test.df, y_pred, y_prob)
+            rank_options = [False]
+            if test['method'] == 'dummy':
+                rank_options = [True, False]
 
-            search_ids = df_with_ranking['srch_id']
-            diff_search_ids = search_ids.drop_duplicates()
+            for preshuffle in rank_options:
+                df_with_ranking = rk.ranking(data_test.df, y_pred, y_prob, preshuffle=preshuffle)
 
-            k = 0
-            ndcg_list = []
+                search_ids = df_with_ranking['srch_id']
+                diff_search_ids = search_ids.drop_duplicates()
 
-            for id in diff_search_ids:
-                mask = (df_with_ranking['srch_id'] == id)
-                result_df = df_with_ranking.loc[mask]
-                ndcg_result = ndcg.ndcg(result_df)
-                ndcg_list.append(ndcg_result)
+                k = 0
+                ndcg_list = []
 
-            meanndcg = sum(ndcg_list) / float(len(ndcg_list))
-            f.write('%s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
-                test['method'], str(boosting), str(params), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
-                f1micro, meanndcg))
+                for id in diff_search_ids:
+                    mask = (df_with_ranking['srch_id'] == id)
+                    result_df = df_with_ranking.loc[mask]
+                    ndcg_result = ndcg.ndcg(result_df)
+                    ndcg_list.append(ndcg_result)
 
-            print "mean ndcg", meanndcg
+                meanndcg = sum(ndcg_list) / float(len(ndcg_list))
+                f.write('%s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
+                    test['method'], str(boosting), str(params), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
+                    f1micro, meanndcg))
+
+                print "\tmean ndcg", meanndcg
