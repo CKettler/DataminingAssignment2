@@ -2,10 +2,13 @@ import data_aggregator as da
 import ranking as rk
 import ndcg_calculation as ndcg
 from sklearn import ensemble
+from sklearn import dummy
 from datetime import datetime
 from sklearn.metrics import *
 import pandas as pd
 import numpy as np
+import pickle as pkl
+
 
 boost_click = True
 filepathTrain = 'data\data_slice_1_added_variables.csv'
@@ -22,8 +25,8 @@ def make_X_y(traindf, select_cols):
     return X, y
 
 
-select_cols = ['visitor_location_country_id', 'visitor_hist_starrating', 'visitor_hist_adr_usd', 'prop_country_id',
-               'prop_id', 'prop_starrating', 'prop_review_score', 'prop_brand_bool', 'prop_location_score1',
+select_cols = ['visitor_location_country_id', 'prop_country_id', 'prop_starrating', 'prop_review_score',
+               'prop_location_score1',
                'prop_location_score2', 'prop_log_historical_price', 'position', 'price_usd', 'promotion_flag',
                'srch_destination_id', 'srch_length_of_stay', 'srch_booking_window', 'srch_adults_count',
                'srch_children_count', 'srch_room_count', 'srch_saturday_night_bool', 'srch_query_affinity_score',
@@ -43,14 +46,36 @@ testSettings = [{'method': 'gradient_boosting',
                                     {'learning_rate': 0.1, 'subsample': 1.0},
                                     {'learning_rate': 1.0, 'subsample': 0.5},
                                     {'learning_rate': 0.1, 'subsample': 0.5},
-                                    {'learning_rate': 0.1, 'max_features': 2}]
-                 }]
+                                    {'learning_rate': 0.1, 'max_features': 2},
+                                    {'n_estimators':100, 'learning_rate': 1.0, 'subsample': 1.0},
+                                    {'n_estimators':100, 'learning_rate': 0.1, 'subsample': 1.0},
+                                    {'n_estimators':100, 'learning_rate': 1.0, 'subsample': 0.5},
+                                    {'n_estimators':100, 'learning_rate': 0.1, 'subsample': 0.5},
+                                    {'n_estimators':100, 'learning_rate': 0.1, 'max_features': 2}]
+                 },
+                {'method': 'adaboost',
+                 'original_params': {'n_estimators': 1000, 'learning_rate ': 1},
+                 'param_variants': [{'learning_rate':0.5},
+                                    {'learning_rate': 0.5},
+                                    {'learning_rate': 0.1},
+                                    {'n_estimators':100, 'learning_rate':0.5},
+                                    {'n_estimators':100, 'learning_rate': 0.5},
+                                    {'n_estimators':100, 'learning_rate': 0.1}]
+                 },
+                {'method': 'dummy',
+                 'original_params': {},
+                 'param_variants': [{}]
+                 }
+                ]
 
+f = open('classif-%s.csv' % (datetime.now().strftime("%d%m%y%H%M%S")), 'w')
+# f = open('classification_results.csv', 'w')
+f.write('method; boosting; params; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg\n')
 for test in testSettings:
     original_params = test['original_params']
     settings = test['param_variants']
     for setting in settings:
-        print "="*40
+        print "=" * 40
         print test['method']
         params = dict(original_params)
         params.update(setting)
@@ -58,6 +83,11 @@ for test in testSettings:
         clf = None
         if test['method'] == 'gradient_boosting':
             clf = ensemble.GradientBoostingClassifier(**params)
+        elif test['method'] == 'adaboost':
+            clf = ensemble.AdaBoostClassifier(**params)
+        elif test['method'] == 'dummy':
+            clf = dummy.DummyClassifier(strategy='most_frequent', random_state=None, constant=None)
+
         for boosting in [True, False]:
             print "Boosting", boosting
             if boosting:
@@ -71,15 +101,25 @@ for test in testSettings:
 
             start_time = datetime.now()
             clf.fit(X_train, y_train)
-            print "\ttrained in", datetime.now() - start_time, "using settings:", params
+            pkl_file = open('%s_Boosting-%s_%s.pkl' % (
+                test['method'], str(boosting), "-".join([str(k) + "-" + str(v) for (k, v) in params.items()])), 'wb')
+            pkl.dump(clf, pkl_file)
+            traintime = datetime.now() - start_time
+            print "\ttrained in", traintime
+            print "\tusing settings:", params
             y_pred = clf.predict(X_test)
             y_prob = clf.predict_proba(X_test)
             print "\tclasses found", np.unique(y_pred)
-            print "\taccuracy:", clf.score(X_test, y_test)
-            print "\trecall macro:", recall_score(y_test, y_pred, average='macro')
-            print "\trecall micro:", recall_score(y_test, y_pred, average='micro')
-            print "\tf1 macro:", f1_score(y_test, y_pred, average='macro')
-            print "\tf1 micro:", f1_score(y_test, y_pred, average='micro')
+            accuracy = clf.score(X_test, y_test)
+            print "\taccuracy:", accuracy
+            recallmacro = recall_score(y_test, y_pred, average='macro')
+            print "\trecall macro:", recallmacro
+            recallmicro = recall_score(y_test, y_pred, average='micro')
+            print "\trecall micro:", recallmicro
+            f1macro = f1_score(y_test, y_pred, average='macro')
+            print "\tf1 macro:", f1macro
+            f1micro = f1_score(y_test, y_pred, average='micro')
+            print "\tf1 micro:", f1micro
 
             df_with_ranking = rk.ranking(data_test.df, y_pred, y_prob)
 
@@ -95,4 +135,9 @@ for test in testSettings:
                 ndcg_result = ndcg.ndcg(result_df)
                 ndcg_list.append(ndcg_result)
 
-            print "mean ndcg",sum(ndcg_list)/float(len(ndcg_list))
+            meanndcg = sum(ndcg_list) / float(len(ndcg_list))
+            f.write('%s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
+                test['method'], str(boosting), str(params), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
+                f1micro, meanndcg))
+
+            print "mean ndcg", meanndcg
