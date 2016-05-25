@@ -25,12 +25,8 @@ def make_X_y(traindf, select_cols):
     return X, y
 
 
-select_cols = ['visitor_location_country_id', 'prop_country_id', 'prop_starrating', 'prop_review_score',
-               'prop_location_score1',
-               'prop_location_score2', 'prop_log_historical_price', 'position', 'price_usd', 'promotion_flag',
-               'srch_destination_id', 'srch_length_of_stay', 'srch_booking_window', 'srch_adults_count',
-               'srch_children_count', 'srch_room_count', 'srch_saturday_night_bool', 'srch_query_affinity_score',
-               'orig_destination_distance']
+select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2',
+               'position', 'price_usd', 'promotion_flag', 'no_bookings_prop', 'no_found_prop']
 
 traindf = data.df.query("click_bool == 1")
 traindf = pd.concat([traindf, data.df.head(len(traindf))])
