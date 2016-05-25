@@ -6,7 +6,7 @@ from datetime import datetime
 pd.options.mode.chained_assignment = None
 
 
-def ranking(df, y_pred, y_prob):
+def ranking(df, y_pred, y_prob, preshuffle = False):
     print "start ranking", datetime.now()
     df = df[['date_time', 'srch_id', 'prop_id', 'target']]
     df['y_pred'] = y_pred
@@ -26,7 +26,11 @@ def ranking(df, y_pred, y_prob):
         mask = (df['srch_id'] == id)
         tf = df.loc[mask]
         if len(tf) > 1:
-            result = tf.sort_values(by=['y_prob_6'], ascending=False)
+            if preshuffle:
+                tf.iloc[np.random.permutation(len(tf))]
+                result = tf.sort_values(by=['y_prob_6'], ascending=False)
+            else:
+                result = tf.sort_values(by=['y_prob_6'], ascending=False)
             result['ranking'] = range(1, len(result['srch_id']) + 1)
         else:
             result = tf
