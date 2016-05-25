@@ -67,6 +67,6 @@ for label, color, setting in [('No shrinkage', 'orange',
     for id in diff_search_ids:
         mask = (df_with_ranking['srch_id'] == id)
         result_df = df_with_ranking.loc[mask]
-        ndcg = ndcg.ndcg(ndcg_list, result_df, k)
+        ndcg = ndcg.ndcg(result_df, k)
         ndcg_list.append([ndcg])
 
