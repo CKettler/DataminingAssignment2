@@ -10,6 +10,7 @@ class DataAggregator:
         self.df = pd.DataFrame()
         self.num_rows = 0
         self.site_ids = []
+        self.srch_ids = []
         self.variables = []
 
     def read_data(self, remove_nan=False):
@@ -19,7 +20,8 @@ class DataAggregator:
         self.num_rows = len(self.df)
         print "num rows:", self.num_rows
         self.df[['comp%d_rate' % i for i in range(1, 9)]] = self.df[['comp%d_rate' % i for i in range(1, 9)]].fillna(axis=1, method='backfill')
-        self.site_ids = self.df['site_id'].unique()  # all participants (don't know if needed)
+        self.site_ids = self.df['site_id'].unique()
+        self.srch_ids = self.df['srch_id'].unique()
         self.variables = list(self.df.columns.values)  # all possible variable names
         # print self.variables
         if remove_nan:
