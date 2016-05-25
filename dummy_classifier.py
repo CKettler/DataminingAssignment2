@@ -17,8 +17,8 @@ def classification(data_matrix, target_matrix, test_matrix, strategy='most_frequ
 filepath = 'data\data_slice_1_added_variables.csv'
 
 data_aggregator = da.DataAggregator(filepath)
-data_aggregator.read_data()
-data_aggregator.df = data_aggregator.df.fillna(0)
+data_aggregator.read_data(remove_nan=True)
+# data_aggregator.df = data_aggregator.df.fillna(0)
 df = data_aggregator.df
 variables = list(df.columns.values)
 target = data_aggregator.df['target'].as_matrix()

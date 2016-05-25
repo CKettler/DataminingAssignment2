@@ -12,7 +12,7 @@ class DataAggregator:
         self.site_ids = []
         self.variables = []
 
-    def read_data(self):
+    def read_data(self, remove_nan=False):
         start_time = datetime.now()
         dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m-%d %H:%M:%S')
         self.df = pd.read_csv(self.filepath, parse_dates=['date_time'], date_parser=dateparse)
@@ -22,6 +22,8 @@ class DataAggregator:
         self.site_ids = self.df['site_id'].unique()  # all participants (don't know if needed)
         self.variables = list(self.df.columns.values)  # all possible variable names
         # print self.variables
+        if remove_nan:
+            self.df = self.df.fillna(0)
         print "data opened in ", datetime.now() - start_time
 
     def keep_df_variables(self, variables):
