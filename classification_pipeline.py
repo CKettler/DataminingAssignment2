@@ -70,7 +70,7 @@ testSettings = [{'method': 'gradient_boosting',
 
 f = open('classif-%s.csv' % (datetime.now().strftime("%d%m%y%H%M%S")), 'w')
 # f = open('classification_results.csv', 'w')
-f.write('method; boosting; params; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg\n')
+f.write('method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg\n')
 for test in testSettings:
     original_params = test['original_params']
     settings = test['param_variants']
@@ -141,8 +141,8 @@ for test in testSettings:
                     ndcg_list.append(ndcg_result)
 
                 meanndcg = sum(ndcg_list) / float(len(ndcg_list))
-                f.write('%s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
-                    test['method'], str(boosting), str(params), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
+                f.write('%s; %s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
+                    test['method'], str(boosting), str(params), str(preshuffle), str(traintime), accuracy, recallmacro, recallmicro, f1macro,
                     f1micro, meanndcg))
 
                 print "\tmean ndcg", meanndcg
