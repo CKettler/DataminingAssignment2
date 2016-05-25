@@ -18,7 +18,6 @@ filepath = 'data\data_slice_1_added_variables.csv'
 
 data_aggregator = da.DataAggregator(filepath)
 data_aggregator.read_data(remove_nan=True)
-# data_aggregator.df = data_aggregator.df.fillna(0)
 df = data_aggregator.df
 variables = list(df.columns.values)
 target = data_aggregator.df['target'].as_matrix()
