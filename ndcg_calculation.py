@@ -16,8 +16,8 @@ def ndcg(result_df,k):
     result_matrix = result_df.as_matrix(['target'])
     sorted_result_matrix = sorted_result_df.as_matrix(['target'])
     for i in range(len(result_matrix)):
-        print result_matrix[i]
-        relevance_rank = result_matrix[i]
+        [relevance_rank] = result_matrix[i]
+        print relevance_rank
         if i > k:
             break
         dcg_rank = ((2**(relevance_rank))-1)/(math.log(1+(1+i),2))
@@ -31,5 +31,4 @@ def ndcg(result_df,k):
     dcgp = sum(dcg_list)
     dcgi = sum(dcgi_list)
     ndcg = dcgp/dcgi
-    print ndcg
     return ndcg
