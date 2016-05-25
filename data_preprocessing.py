@@ -30,15 +30,13 @@ class DataPreprocessing(DataAggregator):
     def add_data(self):
 
         lambdafunc = lambda x: pd.Series([self.comp_rate_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                          self.comp_expensive_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
-                                          self.comp_cheap_calc([x['comp%d_rate' % i] for i in range(1, 9)]),
                                           int(x['click_bool']) + 5 * int(x['booking_bool'])
                                           ])
 
         print "lambdafunc created", datetime.now().time()
         newcols = self.df.apply(lambdafunc, axis=1)
         print "new cols created", datetime.now().time()
-        newcols.columns = ['comp_rate_sum', 'comp_expensive', 'comp_cheap', 'target']
+        newcols.columns = ['comp_rate_sum', 'target']
         booking_properties_dict = self.bookings_property()
         booking_prop_array, found_prop_array = self.feature_from_booking_properties(booking_properties_dict)
         self.df['no_bookings_prop'] = np.transpose(booking_prop_array)
