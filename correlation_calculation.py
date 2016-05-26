@@ -17,16 +17,22 @@ data_path_figs = 'C:/Users/Celeste/Documents/GitHub/DataminingAssignment2'
 # the dataframe
 # filepath = 'data/test_file1.csv'
 # filepath = 'C:/Users/Celeste/Documents/Masters/Datamining/training_set_VU_DM_2014.csv'
-filepath = 'data/data_slice_1_added_variables.csv'
-data_aggregator = da.DataAggregator(filepath)
-data_aggregator.read_data()
-df = data_aggregator.df
-targets = [df['click_bool'], df['booking_bool'], df['target']]
-variables = list(df.columns.values)
 
-for sample in range(0,1):
+for sample in range(0,3):
     # here the data gets sampled
     #data = ds.sampling(df)
+    if sample == 0:
+        filepath = 'data/data_slice_1_added_variables.csv'
+    elif sample == 1:
+        filepath = 'data/data_slice_2_added_variables.csv'
+    elif sample == 2:
+        filepath = 'data/data_slice_3_added_variables.csv'
+
+    data_aggregator = da.DataAggregator(filepath)
+    data_aggregator.read_data(remove_nan=True)
+    df = data_aggregator.df
+    targets = [df['click_bool'], df['booking_bool'], df['target']]
+    variables = list(df.columns.values)
 
     data = df
     new_features = []
