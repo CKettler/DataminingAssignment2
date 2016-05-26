@@ -53,7 +53,7 @@ testSettings = [{'method': 'gradient_boosting',
                                     {'n_estimators': 100, 'learning_rate': 0.1, 'max_features': 2}]
                  },
                 {'method': 'adaboost',
-                 'original_params': {'n_estimators': 1000, 'learning_rate ': 1},
+                 'original_params': {'n_estimators': 1000, 'learning_rate': 1},
                  'param_variants': [{'learning_rate': 0.5},
                                     {'learning_rate': 0.5},
                                     {'learning_rate': 0.1},
