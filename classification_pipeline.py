@@ -49,7 +49,7 @@ testSettings = [{'method': 'gradient_boosting',
                                     {'n_estimators': 100, 'learning_rate': 0.1, 'max_features': 2}]
                  },
                 {'method': 'adaboost',
-                 'original_params': {'n_estimators': 1000, 'learning_rate ': 1},
+                 'original_params': {'n_estimators': 1000, 'learning_rate': 1},
                  'param_variants': [{'learning_rate': 0.5},
                                     {'learning_rate': 0.5},
                                     {'learning_rate': 0.1},
@@ -90,7 +90,7 @@ for test in testSettings:
             clf = ensemble.GradientBoostingClassifier(**params)
         elif test['method'] == 'adaboost':
             clf = ensemble.AdaBoostClassifier(**params)
-        elif test['method'] == 'randomforests':
+        elif test['method'] == 'randomforest':
             clf = ensemble.RandomForestClassifier(**params)
         elif test['method'] == 'dummy':
             clf = dummy.DummyClassifier(strategy='most_frequent', random_state=None, constant=None)
@@ -148,7 +148,7 @@ for test in testSettings:
                     ndcg_list.append(ndcg_result)
 
                 meanndcg = sum(ndcg_list) / float(len(ndcg_list))
-                f.write('%s; %s; %s; %s; %s; %d; %d; %d; %d; %d; %d\n' % (
+                f.write('%s; %s; %s; %s; %s; %f; %f; %f; %f; %f; %f\n' % (
                     test['method'], str(boosting), str(params), str(preshuffle), str(traintime), accuracy, recallmacro,
                     recallmicro, f1macro,
                     f1micro, meanndcg))

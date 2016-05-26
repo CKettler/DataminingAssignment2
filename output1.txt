@@ -1,0 +1,445 @@
+num rows: 206373
+data opened in  0:00:09.689000
+num rows: 208145
+data opened in  0:00:09.569000
+========================================
+gradient_boosting
+{'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+Boosting True
+        trained in 0:00:00.719000
+        using settings: {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.8145379423
+        recall macro: 0.657577269554
+        recall micro: 0.8145379423
+        f1 macro: 0.434062539653
+        f1 micro: 0.8145379423
+start ranking 2016-05-25 21:57:10.482000
+created ranked df 2016-05-25 21:58:46.716000
+        mean ndcg 0.667960823218
+Boosting False
+        trained in 0:00:10.018000
+        using settings: {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960316125778
+        recall macro: 0.437489687369
+        recall micro: 0.960316125778
+        f1 macro: 0.471943668453
+        f1 micro: 0.960316125778
+start ranking 2016-05-25 21:59:29.360000
+created ranked df 2016-05-25 22:01:04.943000
+        mean ndcg 0.674967917758
+========================================
+gradient_boosting
+{'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+Boosting True
+        trained in 0:00:00.598000
+        using settings: {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.796012395205
+        recall macro: 0.652947397655
+        recall micro: 0.796012395205
+        f1 macro: 0.414862377409
+        f1 micro: 0.796012395205
+start ranking 2016-05-25 22:01:38.138000
+created ranked df 2016-05-25 22:03:14.163000
+        mean ndcg 0.652824922498
+Boosting False
+        trained in 0:00:09.855000
+        using settings: {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.  6.]
+        accuracy: 0.95925917029
+        recall macro: 0.386253477177
+        recall micro: 0.95925917029
+C:\Users\Erik\Anaconda2\lib\site-packages\sklearn\metrics\classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+        f1 macro: 0.416834839049
+        f1 micro: 0.95925917029
+start ranking 2016-05-25 22:03:56.510000
+created ranked df 2016-05-25 22:05:32.156000
+        mean ndcg 0.652977638975
+========================================
+gradient_boosting
+{'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+Boosting True
+        trained in 0:00:00.610000
+        using settings: {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.818150808331
+        recall macro: 0.656263258466
+        recall micro: 0.818150808331
+        f1 macro: 0.434686531819
+        f1 micro: 0.818150808331
+start ranking 2016-05-25 22:06:05.398000
+created ranked df 2016-05-25 22:07:43.545000
+        mean ndcg 0.66357519095
+Boosting False
+        trained in 0:00:09.132000
+        using settings: {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960378582238
+        recall macro: 0.432798883955
+        recall micro: 0.960378582238
+        f1 macro: 0.468319874153
+        f1 micro: 0.960378582238
+start ranking 2016-05-25 22:08:26.785000
+created ranked df 2016-05-25 22:10:03.929000
+        mean ndcg 0.674313156801
+========================================
+gradient_boosting
+{'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+Boosting True
+        trained in 0:00:00.749000
+        using settings: {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.81755026544
+        recall macro: 0.642595102099
+        recall micro: 0.81755026544
+        f1 macro: 0.419932797223
+        f1 micro: 0.81755026544
+start ranking 2016-05-25 22:10:41.724000
+created ranked df 2016-05-25 22:12:24.933000
+        mean ndcg 0.654752755586
+Boosting False
+        trained in 0:00:09.596000
+        using settings: {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.  6.]
+        accuracy: 0.95925917029
+        recall macro: 0.386253477177
+        recall micro: 0.95925917029
+        f1 macro: 0.416834839049
+        f1 micro: 0.95925917029
+start ranking 2016-05-25 22:13:11.823000
+created ranked df 2016-05-25 22:15:03.045000
+        mean ndcg 0.651011999999
+========================================
+gradient_boosting
+{'n_estimators': 10, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+Boosting True
+        trained in 0:00:00.593000
+        using settings: {'n_estimators': 10, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.  6.]
+        accuracy: 0.825405366451
+        recall macro: 0.611569348791
+        recall micro: 0.825405366451
+        f1 macro: 0.386189602094
+        f1 micro: 0.825405366451
+start ranking 2016-05-25 22:15:47.498000
+created ranked df 2016-05-25 22:18:29.750000
+        mean ndcg 0.663174970789
+Boosting False
+        trained in 0:00:12.571000
+        using settings: {'n_estimators': 10, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}
+        classes found [ 0.]
+        accuracy: 0.955213913378
+        recall macro: 0.333333333333
+        recall micro: 0.955213913378
+        f1 macro: 0.325698007378
+        f1 micro: 0.955213913378
+start ranking 2016-05-25 22:19:25.606000
+created ranked df 2016-05-25 22:21:59.895000
+        mean ndcg 0.667683479406
+========================================
+gradient_boosting
+{'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+Boosting True
+        trained in 0:00:05.344000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.803526387855
+        recall macro: 0.651823706345
+        recall micro: 0.803526387855
+        f1 macro: 0.428709095275
+        f1 micro: 0.803526387855
+start ranking 2016-05-25 22:22:44.469000
+created ranked df 2016-05-25 22:24:26.811000
+        mean ndcg 0.662942440774
+Boosting False
+        trained in 0:01:34.181000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.959196713829
+        recall macro: 0.433076622911
+        recall micro: 0.959196713829
+        f1 macro: 0.467556996757
+        f1 micro: 0.959196713829
+start ranking 2016-05-25 22:26:38.308000
+created ranked df 2016-05-25 22:28:16.263000
+        mean ndcg 0.670116984099
+========================================
+gradient_boosting
+{'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+Boosting True
+        trained in 0:00:06.545000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.818237286507
+        recall macro: 0.656556183784
+        recall micro: 0.818237286507
+        f1 macro: 0.433095660141
+        f1 micro: 0.818237286507
+start ranking 2016-05-25 22:29:05.864000
+created ranked df 2016-05-25 22:31:14.263000
+        mean ndcg 0.67061713736
+Boosting False
+        trained in 0:03:22.092000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960460256071
+        recall macro: 0.436603172437
+        recall micro: 0.960460256071
+        f1 macro: 0.471656857833
+        f1 micro: 0.960460256071
+start ranking 2016-05-25 22:35:54.222000
+created ranked df 2016-05-25 22:39:08.617000
+        mean ndcg 0.682031546729
+========================================
+gradient_boosting
+{'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+Boosting True
+        trained in 0:00:05.496000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.789310336544
+        recall macro: 0.648150226985
+        recall micro: 0.789310336544
+        f1 macro: 0.421656960621
+        f1 micro: 0.789310336544
+start ranking 2016-05-25 22:40:11.091000
+created ranked df 2016-05-25 22:41:47.132000
+        mean ndcg 0.657161006757
+Boosting False
+        trained in 0:01:18.098000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.959302409378
+        recall macro: 0.433338926783
+        recall micro: 0.959302409378
+        f1 macro: 0.467415780193
+        f1 micro: 0.959302409378
+start ranking 2016-05-25 22:43:41.454000
+created ranked df 2016-05-25 22:45:16.428000
+        mean ndcg 0.666189676304
+========================================
+gradient_boosting
+{'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+Boosting True
+        trained in 0:00:05.358000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.815883158375
+        recall macro: 0.659611466577
+        recall micro: 0.815883158375
+        f1 macro: 0.434039811315
+        f1 micro: 0.815883158375
+start ranking 2016-05-25 22:45:58.170000
+created ranked df 2016-05-25 22:47:32.963000
+        mean ndcg 0.676452972517
+Boosting False
+        trained in 0:01:23.839000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960407408297
+        recall macro: 0.438310512003
+        recall micro: 0.960407408297
+        f1 macro: 0.47295479442
+        f1 micro: 0.960407408297
+start ranking 2016-05-25 22:49:33.038000
+created ranked df 2016-05-25 22:51:07.665000
+        mean ndcg 0.682661107371
+========================================
+gradient_boosting
+{'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+Boosting True
+        trained in 0:00:03.617000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.819693002474
+        recall macro: 0.654340836522
+        recall micro: 0.819693002474
+        f1 macro: 0.432350984192
+        f1 micro: 0.819693002474
+start ranking 2016-05-25 22:51:47.637000
+created ranked df 2016-05-25 22:53:22.590000
+        mean ndcg 0.670960742036
+Boosting False
+        trained in 0:00:58.581000
+        using settings: {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}
+        classes found [ 0.  6.]
+        accuracy: 0.960162386798
+        recall macro: 0.427538776645
+        recall micro: 0.960162386798
+        f1 macro: 0.462899798541
+        f1 micro: 0.960162386798
+start ranking 2016-05-25 22:54:57.637000
+created ranked df 2016-05-25 22:56:32.491000
+        mean ndcg 0.679068544997
+========================================
+num rows: 206373
+data opened in  0:00:09.823000
+num rows: 208145
+data opened in  0:00:09.793000
+========================================
+adaboost
+{'n_estimators': 1000, 'learning_rate': 0.5}
+Boosting True
+        trained in 0:00:18.929000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.79103990007
+        recall macro: 0.646584481277
+        recall micro: 0.79103990007
+        f1 macro: 0.421775387158
+        f1 micro: 0.79103990007
+start ranking 2016-05-26 10:41:14.773000
+created ranked df 2016-05-26 10:42:52.267000
+        mean ndcg 0.674048893626
+Boosting False
+        trained in 0:04:12.749000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960296908405
+        recall macro: 0.431586927135
+        recall micro: 0.960296908405
+        f1 macro: 0.466812229715
+        f1 micro: 0.960296908405
+start ranking 2016-05-26 10:51:12.073000
+created ranked df 2016-05-26 10:52:46.885000
+        mean ndcg 0.674668180721
+========================================
+adaboost
+{'n_estimators': 1000, 'learning_rate': 0.5}
+Boosting True
+        trained in 0:00:18.081000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.79103990007
+        recall macro: 0.646584481277
+        recall micro: 0.79103990007
+        f1 macro: 0.421775387158
+        f1 micro: 0.79103990007
+start ranking 2016-05-26 10:57:13.062000
+created ranked df 2016-05-26 10:58:47.874000
+        mean ndcg 0.674048893626
+Boosting False
+        trained in 0:04:13.382000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.960296908405
+        recall macro: 0.431586927135
+        recall micro: 0.960296908405
+        f1 macro: 0.466812229715
+        f1 micro: 0.960296908405
+start ranking 2016-05-26 11:07:26.553000
+created ranked df 2016-05-26 11:09:43.426000
+        mean ndcg 0.674668180721
+========================================
+adaboost
+{'n_estimators': 1000, 'learning_rate': 0.1}
+Boosting True
+        trained in 0:00:25.318000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.1}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.834841096351
+        recall macro: 0.635571411517
+        recall micro: 0.834841096351
+        f1 macro: 0.430880135984
+        f1 micro: 0.834841096351
+start ranking 2016-05-26 11:15:33.774000
+created ranked df 2016-05-26 11:17:49.481000
+        mean ndcg 0.679183371306
+Boosting False
+        trained in 0:04:13.671000
+        using settings: {'n_estimators': 1000, 'learning_rate': 0.1}
+        classes found [ 0.  6.]
+        accuracy: 0.960431430013
+        recall macro: 0.428647053147
+        recall micro: 0.960431430013
+C:\Users\Erik\Anaconda2\lib\site-packages\sklearn\metrics\classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+        f1 macro: 0.464819675885
+        f1 micro: 0.960431430013
+start ranking 2016-05-26 11:26:15.110000
+created ranked df 2016-05-26 11:27:51.855000
+        mean ndcg 0.680749496606
+========================================
+adaboost
+{'n_estimators': 100, 'learning_rate': 0.5}
+Boosting True
+        trained in 0:00:01.884000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.835446443585
+        recall macro: 0.637077355692
+        recall micro: 0.835446443585
+        f1 macro: 0.432406450299
+        f1 micro: 0.835446443585
+start ranking 2016-05-26 11:28:47.291000
+created ranked df 2016-05-26 11:30:24.242000
+        mean ndcg 0.678805021288
+Boosting False
+        trained in 0:00:25.155000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.5}
+        classes found [ 0.  6.]
+        accuracy: 0.960277691033
+        recall macro: 0.430002279992
+        recall micro: 0.960277691033
+        f1 macro: 0.465402332157
+        f1 micro: 0.960277691033
+start ranking 2016-05-26 11:31:42.431000
+created ranked df 2016-05-26 11:33:19.165000
+        mean ndcg 0.680714364911
+========================================
+adaboost
+{'n_estimators': 100, 'learning_rate': 0.5}
+Boosting True
+        trained in 0:00:01.817000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.5}
+        classes found [ 0.  1.  6.]
+        accuracy: 0.835446443585
+        recall macro: 0.637077355692
+        recall micro: 0.835446443585
+        f1 macro: 0.432406450299
+        f1 micro: 0.835446443585
+start ranking 2016-05-26 11:34:14.108000
+created ranked df 2016-05-26 11:35:50.886000
+        mean ndcg 0.678805021288
+Boosting False
+        trained in 0:00:27.832000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.5}
+        classes found [ 0.  6.]
+        accuracy: 0.960277691033
+        recall macro: 0.430002279992
+        recall micro: 0.960277691033
+        f1 macro: 0.465402332157
+        f1 micro: 0.960277691033
+start ranking 2016-05-26 11:37:11.634000
+created ranked df 2016-05-26 11:38:48.091000
+        mean ndcg 0.680714364911
+========================================
+adaboost
+{'n_estimators': 100, 'learning_rate': 0.1}
+Boosting True
+        trained in 0:00:01.843000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.1}
+        classes found [ 0.  6.]
+        accuracy: 0.859400898412
+        recall macro: 0.614528401045
+        recall micro: 0.859400898412
+        f1 macro: 0.407248806326
+        f1 micro: 0.859400898412
+start ranking 2016-05-26 11:39:43.196000
+created ranked df 2016-05-26 11:41:19.686000
+        mean ndcg 0.6752150079
+Boosting False
+        trained in 0:00:25.351000
+        using settings: {'n_estimators': 100, 'learning_rate': 0.1}
+        classes found [ 0.  6.]
+        accuracy: 0.960143169425
+        recall macro: 0.409273038813
+        recall micro: 0.960143169425
+        f1 macro: 0.445688254218
+        f1 micro: 0.960143169425
+start ranking 2016-05-26 11:42:38.835000
+created ranked df 2016-05-26 11:44:15.334000
+        mean ndcg 0.679337173655

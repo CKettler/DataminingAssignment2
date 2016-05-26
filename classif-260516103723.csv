@@ -1,0 +1,13 @@
+method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:00:18.929000; 0.791040; 0.646584; 0.791040; 0.421775; 0.791040; 0.674049
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:04:12.749000; 0.960297; 0.431587; 0.960297; 0.466812; 0.960297; 0.674668
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:00:18.081000; 0.791040; 0.646584; 0.791040; 0.421775; 0.791040; 0.674049
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:04:13.382000; 0.960297; 0.431587; 0.960297; 0.466812; 0.960297; 0.674668
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.1}; False; 0:00:25.318000; 0.834841; 0.635571; 0.834841; 0.430880; 0.834841; 0.679183
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.1}; False; 0:04:13.671000; 0.960431; 0.428647; 0.960431; 0.464820; 0.960431; 0.680749
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:01.884000; 0.835446; 0.637077; 0.835446; 0.432406; 0.835446; 0.678805
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:25.155000; 0.960278; 0.430002; 0.960278; 0.465402; 0.960278; 0.680714
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:01.817000; 0.835446; 0.637077; 0.835446; 0.432406; 0.835446; 0.678805
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:27.832000; 0.960278; 0.430002; 0.960278; 0.465402; 0.960278; 0.680714
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.1}; False; 0:00:01.843000; 0.859401; 0.614528; 0.859401; 0.407249; 0.859401; 0.675215
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.1}; False; 0:00:25.351000; 0.960143; 0.409273; 0.960143; 0.445688; 0.960143; 0.679337
