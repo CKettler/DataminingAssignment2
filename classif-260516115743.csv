@@ -1,2 +1,0 @@
-method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg
-randomforest; True; {'n_estimators': 1000, 'max_depth': None}; False; 0:02:33.618000; 0.789003; 0.649441; 0.789003; 0.421220; 0.789003; 0.653407

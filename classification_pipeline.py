@@ -11,12 +11,20 @@ import pickle as pkl
 
 boost_click = True
 filepathTrain = 'data\data_slice_1_added_variables.csv'
-filepathTest = 'data\data_slice_2_added_variables.csv'
+filepathTest_1 = 'data\data_slice_2_added_variables.csv'
+filepathTest_2 = 'data\data_slice_3_added_variables.csv'
 data = da.DataAggregator(filepathTrain)
 data.read_data(remove_nan=True)
-data_test = da.DataAggregator(filepathTest)
-data_test.read_data(remove_nan=True)
+data_test_1 = da.DataAggregator(filepathTest_1)
+data_test_1.read_data(remove_nan=True)
+data_test_2 = da.DataAggregator(filepathTest_2)
+data_test_2.read_data(remove_nan=True)
 
+
+data_test = pd.concat([data_test_1.df, data_test_2.df])
+
+del data_test_1
+del data_test_2
 
 def make_X_y(traindf, select_cols):
     y = traindf.as_matrix(['target'])[:, 0]
@@ -32,9 +40,9 @@ traindf = pd.concat([traindf, data.df.head(len(traindf))])
 X_train_boosted, y_train_boosted = make_X_y(traindf, select_cols)
 X_train_normal, y_train_normal = make_X_y(data.df, select_cols)
 
-X_test, y_test = make_X_y(data_test.df, select_cols)
+X_test, y_test = make_X_y(data_test, select_cols)
 
-testSettings = [{'method': 'gradient_boosting',
+testSettings = [ {'method': 'gradient_boosting',
                  'original_params': {'n_estimators': 10, 'max_leaf_nodes': 4, 'max_depth': None, 'random_state': 2,
                                      'min_samples_split': 5},
                  'param_variants': [{'learning_rate': 1.0, 'subsample': 1.0},
@@ -59,12 +67,12 @@ testSettings = [{'method': 'gradient_boosting',
                  },
                 {'method': 'randomforest',
                  'original_params': {'n_estimators': 10, 'max_depth': None},
-                 'param_variants': [{'n_estimators': 1000},
-                                    {'n_estimators': 1000, 'max_depth': 1000},
-                                    {'n_estimators': 1000, 'max_depth': 500},
+                 'param_variants': [{'n_estimators': 10},
+                                    {'n_estimators': 10, 'max_depth': 20},
+                                    {'n_estimators': 10, 'max_depth': 5},
                                     {'n_estimators': 100},
-                                    {'n_estimators': 100, 'max_depth': 1000},
-                                    {'n_estimators': 100, 'max_depth': 500}]
+                                    {'n_estimators': 100, 'max_depth': 20},
+                                    {'n_estimators': 100, 'max_depth': 5}]
                  },
                 {'method': 'dummy',
                  'original_params': {},
@@ -133,7 +141,7 @@ for test in testSettings:
                 rank_options = [True, False]
 
             for preshuffle in rank_options:
-                df_with_ranking = rk.ranking(data_test.df, y_pred, y_prob, preshuffle=preshuffle)
+                df_with_ranking = rk.ranking(data_test, y_pred, y_prob, preshuffle=preshuffle)
 
                 search_ids = df_with_ranking['srch_id']
                 diff_search_ids = search_ids.drop_duplicates()
