@@ -27,7 +27,6 @@ def add_new_features(data_test_df):
             feature_book_array = no_bookings_dict[id_string] * ones_array
         else:
             feature_book_array = 0 * ones_array
-            print feature_book_array
         tf['no_found_prop'] = feature_found_array
         tf['no_bookings_prop'] = feature_book_array
         if k != 0:
@@ -36,8 +35,6 @@ def add_new_features(data_test_df):
         else:
             new_df = tf
         k += 1
-        print new_df
-        break
     return new_df
 
 
@@ -47,7 +44,7 @@ filepath_test = 'data/mini_test.csv'
 
 data_aggregator = dp.DataPreprocessing(filepath_test)
 print "adding data"
-data_aggregator.add_data()
+# data_aggregator.add_data()
 data_test_df = data_aggregator.df
 data_test_df = add_new_features(data_test_df)
 print "data added"
@@ -62,7 +59,6 @@ def make_X(testdf, select_cols):
     testdf.fillna(0)
     X = testdf.as_matrix(select_cols)
     X = np.nan_to_num(X)
-    print X
     return X
 
 
@@ -70,7 +66,6 @@ select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2', '
 
 
 X_test = make_X(data_test_df, select_cols)
-print X_test
 
 
 model = pkl.load(open('Classifiers_result_2\gradient_boosting_Boosting-False_max_leaf_nodes-4-learning_rate-0.1-n_estimators-100-subsample-0.5-random_state-2-min_samples_split-5-max_depth-None.pkl', 'r'))
