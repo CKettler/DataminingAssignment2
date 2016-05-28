@@ -7,15 +7,20 @@ import pickle as pkl
 filepath_test = 'data/mini_test.csv'
 
 data_aggregator = dp.DataPreprocessing(filepath_test)
+print "adding data"
 data_aggregator.add_data()
+print "data added"
+print "saving data"
 data_aggregator.df.to_csv("data/test_set_added_variables.csv")
-
+print "data saved"
 filepath_added_variables = "data/test_set_added_variables.csv"
 
-data_test = da.DataAggregator(filepath_added_variables)
-data_test.read_data(remove_nan=True)
-data_test_df = data_test.df
-print data_test_df
+
+#can be skipped as we already have it ;)
+# data_test = da.DataAggregator(filepath_added_variables)
+# data_test.read_data(remove_nan=True)
+data_test_df = data_aggregator.df
+
 
 def make_X(testdf, select_cols):
     X = testdf.as_matrix(select_cols)
@@ -26,8 +31,13 @@ select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2',
                'position', 'price_usd', 'promotion_flag', 'no_bookings_prop', 'no_found_prop']
 
 
+<<<<<<< Updated upstream
 X_test = make_X(data_test_df, select_cols)
 print X_test
+=======
+X_test, y_test = make_X_y(data_test_df, select_cols)
+print 
+>>>>>>> Stashed changes
 
 model = pkl.load(open('Classifiers_result_2\gradient_boosting_Boosting-False_max_leaf_nodes-4-learning_rate-0.1-n_estimators-100-subsample-0.5-random_state-2-min_samples_split-5-max_depth-None.pkl', 'r'))
 
