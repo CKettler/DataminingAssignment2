@@ -141,7 +141,7 @@ for test in testSettings:
                 rank_options = [True, False]
 
             for preshuffle in rank_options:
-                df_with_ranking = rk.ranking(data_test, y_pred, y_prob, preshuffle=preshuffle)
+                df_with_ranking = rk.ranking(data_test, y_pred, y_prob, preshuffle=preshuffle, target = True)
 
                 search_ids = df_with_ranking['srch_id']
                 diff_search_ids = search_ids.drop_duplicates()
