@@ -4,7 +4,7 @@ import data_preprocessing as dp
 import pandas as pd
 import pickle as pkl
 
-filepath_test = 'data/test_file1.csv'
+filepath_test = 'data/mini_test.csv'
 
 data_aggregator = dp.DataPreprocessing(filepath_test)
 data_aggregator.add_data()
@@ -17,17 +17,16 @@ data_test.read_data(remove_nan=True)
 data_test_df = data_test.df
 print data_test_df
 
-def make_X_y(testdf, select_cols):
-    y = testdf.as_matrix(['target'])[:, 0]
+def make_X(testdf, select_cols):
     X = testdf.as_matrix(select_cols)
-    return X, y
+    return X
 
 
 select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2',
                'position', 'price_usd', 'promotion_flag', 'no_bookings_prop', 'no_found_prop']
 
 
-X_test, y_test = make_X_y(data_test_df, select_cols)
+X_test = make_X(data_test_df, select_cols)
 print X_test
 
 model = pkl.load(open('Classifiers_result_2\gradient_boosting_Boosting-False_max_leaf_nodes-4-learning_rate-0.1-n_estimators-100-subsample-0.5-random_state-2-min_samples_split-5-max_depth-None.pkl', 'r'))
