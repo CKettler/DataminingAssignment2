@@ -1,0 +1,49 @@
+method; boosting; params; preshuffle; traintime; accuracy; recallmacro; recallmicro; f1macro; f1micro; meanndcg
+gradient_boosting; True; {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}; False; 0:00:00.763000; 0.814590; 0.659124; 0.814590; 0.434286; 0.814590; 0.667753
+gradient_boosting; False; {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}; False; 0:00:10.117000; 0.960551; 0.439160; 0.960551; 0.473393; 0.960551; 0.674563
+gradient_boosting; True; {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:00.612000; 0.795956; 0.653844; 0.795956; 0.414916; 0.795956; 0.651822
+gradient_boosting; False; {'n_estimators': 10, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:09.911000; 0.959473; 0.386790; 0.959473; 0.417565; 0.959473; 0.651485
+gradient_boosting; True; {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}; False; 0:00:00.667000; 0.818263; 0.656197; 0.818263; 0.434397; 0.818263; 0.664256
+gradient_boosting; False; {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 1.0, 'max_depth': None}; False; 0:00:09.902000; 0.960633; 0.434889; 0.960633; 0.470287; 0.960633; 0.674390
+gradient_boosting; True; {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:00.603000; 0.817480; 0.643276; 0.817480; 0.420120; 0.817480; 0.652950
+gradient_boosting; False; {'n_estimators': 10, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:08.800000; 0.959473; 0.386790; 0.959473; 0.417565; 0.959473; 0.650203
+gradient_boosting; True; {'n_estimators': 10, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:00.391000; 0.824104; 0.611117; 0.824104; 0.385491; 0.824104; 0.664253
+gradient_boosting; False; {'n_estimators': 10, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_leaf_nodes': 4, 'learning_rate': 0.1, 'max_depth': None}; False; 0:00:06.148000; 0.955414; 0.333333; 0.955414; 0.325733; 0.955414; 0.667558
+gradient_boosting; True; {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:06.105000; 0.803169; 0.651881; 0.803169; 0.428128; 0.803169; 0.662295
+gradient_boosting; False; {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:01:30.233000; 0.959547; 0.435444; 0.959547; 0.470201; 0.959547; 0.670429
+gradient_boosting; True; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:05.755000; 0.818654; 0.657840; 0.818654; 0.433605; 0.818654; 0.669852
+gradient_boosting; False; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 1.0, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:01:55.088000; 0.960787; 0.438043; 0.960787; 0.473210; 0.960787; 0.681759
+gradient_boosting; True; {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:05.374000; 0.789334; 0.649848; 0.789334; 0.421535; 0.789334; 0.657426
+gradient_boosting; False; {'max_leaf_nodes': 4, 'learning_rate': 1.0, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:01:19.398000; 0.959602; 0.437262; 0.959602; 0.471171; 0.959602; 0.666485
+gradient_boosting; True; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:05.347000; 0.816516; 0.660240; 0.816516; 0.434376; 0.816516; 0.676237
+gradient_boosting; False; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'subsample': 0.5, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:01:24.489000; 0.960719; 0.439959; 0.960719; 0.474604; 0.960719; 0.682783
+gradient_boosting; True; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:03.667000; 0.820328; 0.656009; 0.820328; 0.433119; 0.820328; 0.671380
+gradient_boosting; False; {'max_leaf_nodes': 4, 'learning_rate': 0.1, 'n_estimators': 100, 'max_features': 2, 'random_state': 2, 'min_samples_split': 5, 'max_depth': None}; False; 0:00:58.874000; 0.960604; 0.429859; 0.960604; 0.465726; 0.960604; 0.679746
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:00:18.388000; 0.791196; 0.644840; 0.791196; 0.421068; 0.791196; 0.673570
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:04:08.134000; 0.960686; 0.433184; 0.960686; 0.468761; 0.960686; 0.673690
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:00:18.461000; 0.791196; 0.644840; 0.791196; 0.421068; 0.791196; 0.673570
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.5}; False; 0:04:08.997000; 0.960686; 0.433184; 0.960686; 0.468761; 0.960686; 0.673690
+adaboost; True; {'n_estimators': 1000, 'learning_rate': 0.1}; False; 0:00:18.270000; 0.834865; 0.636309; 0.834865; 0.430981; 0.834865; 0.678662
+adaboost; False; {'n_estimators': 1000, 'learning_rate': 0.1}; False; 0:04:08.855000; 0.960815; 0.431038; 0.960815; 0.467454; 0.960815; 0.680622
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:01.847000; 0.835434; 0.636541; 0.835434; 0.431920; 0.835434; 0.678687
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:24.850000; 0.960642; 0.431793; 0.960642; 0.467437; 0.960642; 0.680320
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:01.849000; 0.835434; 0.636541; 0.835434; 0.431920; 0.835434; 0.678687
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.5}; False; 0:00:24.881000; 0.960642; 0.431793; 0.960642; 0.467437; 0.960642; 0.680320
+adaboost; True; {'n_estimators': 100, 'learning_rate': 0.1}; False; 0:00:01.946000; 0.859381; 0.615135; 0.859381; 0.407436; 0.859381; 0.675126
+adaboost; False; {'n_estimators': 100, 'learning_rate': 0.1}; False; 0:00:25.188000; 0.960397; 0.410885; 0.960397; 0.447511; 0.960397; 0.678896
+randomforest; True; {'n_estimators': 10, 'max_depth': None}; False; 0:00:01.529000; 0.789392; 0.630017; 0.789392; 0.421412; 0.789392; 0.634618
+randomforest; False; {'n_estimators': 10, 'max_depth': None}; False; 0:00:07.763000; 0.957823; 0.430941; 0.957823; 0.461554; 0.957823; 0.627480
+randomforest; True; {'n_estimators': 10, 'max_depth': 20}; False; 0:00:01.350000; 0.781012; 0.636515; 0.781012; 0.418244; 0.781012; 0.637538
+randomforest; False; {'n_estimators': 10, 'max_depth': 20}; False; 0:00:06.513000; 0.958685; 0.436735; 0.958685; 0.466892; 0.958685; 0.646343
+randomforest; True; {'n_estimators': 10, 'max_depth': 5}; False; 0:00:00.157000; 0.817129; 0.629394; 0.817129; 0.409082; 0.817129; 0.654674
+randomforest; False; {'n_estimators': 10, 'max_depth': 5}; False; 0:00:02.076000; 0.956449; 0.348363; 0.956449; 0.354574; 0.956449; 0.659794
+randomforest; True; {'n_estimators': 100, 'max_depth': None}; False; 0:00:17.259000; 0.790612; 0.646901; 0.790612; 0.421497; 0.790612; 0.651093
+randomforest; False; {'n_estimators': 100, 'max_depth': None}; False; 0:01:25.553000; 0.958990; 0.433422; 0.958990; 0.466206; 0.958990; 0.655939
+randomforest; True; {'n_estimators': 100, 'max_depth': 20}; False; 0:00:15.036000; 0.798384; 0.649250; 0.798384; 0.423651; 0.798384; 0.652325
+randomforest; False; {'n_estimators': 100, 'max_depth': 20}; False; 0:01:13.724000; 0.959876; 0.432994; 0.959876; 0.466589; 0.959876; 0.660575
+randomforest; True; {'n_estimators': 100, 'max_depth': 5}; False; 0:00:01.637000; 0.825850; 0.619510; 0.825850; 0.401443; 0.825850; 0.669465
+randomforest; False; {'n_estimators': 100, 'max_depth': 5}; False; 0:00:20.526000; 0.958106; 0.368217; 0.958106; 0.389001; 0.958106; 0.672436
+dummy; True; {}; True; 0:00:00.002000; 0.955414; 0.333333; 0.955414; 0.325733; 0.955414; 0.347722
+dummy; True; {}; False; 0:00:00.002000; 0.955414; 0.333333; 0.955414; 0.325733; 0.955414; 0.347722
+dummy; False; {}; True; 0:00:00.022000; 0.955414; 0.333333; 0.955414; 0.325733; 0.955414; 0.347722
+dummy; False; {}; False; 0:00:00.022000; 0.955414; 0.333333; 0.955414; 0.325733; 0.955414; 0.347722
