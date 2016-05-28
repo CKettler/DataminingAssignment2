@@ -6,9 +6,12 @@ from datetime import datetime
 pd.options.mode.chained_assignment = None
 
 
-def ranking(df, y_pred, y_prob, preshuffle = False):
+def ranking(df, y_pred, y_prob, preshuffle = False, target = False):
     print "start ranking", datetime.now()
-    df = df[['date_time', 'srch_id', 'prop_id', 'target']]
+    if target:
+        df = df[['date_time', 'srch_id', 'prop_id', 'target']]
+    else:
+        df = df[['date_time', 'srch_id', 'prop_id']]
     df['y_pred'] = y_pred
     df['y_prob_0'] = y_prob[:, 0]
     df['y_prob_1'] = y_prob[:, 1]
@@ -35,7 +38,10 @@ def ranking(df, y_pred, y_prob, preshuffle = False):
         else:
             result = tf
             result['ranking'] = 1
-        rank = result[['date_time', 'ranking', 'srch_id', 'prop_id', 'target']]
+        if target:
+            rank = result[['date_time', 'ranking', 'srch_id', 'prop_id', 'target']]
+        else:
+            rank = result[['date_time', 'ranking', 'srch_id', 'prop_id']]
         if k != 0:
             df_list = [new_df, rank]
             new_df = pd.concat(df_list)
