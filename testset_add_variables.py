@@ -43,7 +43,7 @@ def add_new_features(data_test_df):
 
 for i in range(13, 16):
     filepath_test = 'data/test_data_slice_%d.csv' % (i)
-
+    print "opening", filepath_test
     data_aggregator = dp.DataPreprocessing(filepath_test)
     print "adding data"
     # data_aggregator.add_data()
