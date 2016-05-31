@@ -19,14 +19,11 @@ data_test_1 = da.DataAggregator(filepathTest_1)
 data_test_1.read_data(remove_nan=True)
 data_test_2 = da.DataAggregator(filepathTest_2)
 data_test_2.read_data(remove_nan=True)
-data = data.df
-data_test_1 = data_test_1.df
-data_test_2 = data_test_2.df
-data = pd.concat([data, data_test_1])
-data = pd.concat([data, data_test_2])
+data = pd.concat([data.df, data_test_1.df])
+data = pd.concat([data.df, data_test_2.df])
 
 
-data_test = pd.concat([data_test_1, data_test_2])
+data_test = pd.concat([data_test_1.df, data_test_2.df])
 
 del data_test_1
 del data_test_2
