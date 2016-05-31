@@ -20,6 +20,8 @@ select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2', '
                'promotion_flag', 'no_bookings_prop', 'no_found_prop']
 rank_options = [False]
 
+slices_to_do = range(17,25)
+
 for i in slices_to_do:
     data_file = "data/test_set_added_variables_%i.csv" % (i)
     data_test_slice = dp.DataAggregator(data_file)
