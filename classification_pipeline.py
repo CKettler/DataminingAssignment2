@@ -20,7 +20,7 @@ data_test_1.read_data(remove_nan=True)
 data_test_2 = da.DataAggregator(filepathTest_2)
 data_test_2.read_data(remove_nan=True)
 data = pd.concat([data.df, data_test_1.df])
-data = pd.concat([data.df, data_test_2.df])
+data = pd.concat([data, data_test_2.df])
 
 
 data_test = pd.concat([data_test_1.df, data_test_2.df])
@@ -37,9 +37,9 @@ def make_X_y(traindf, select_cols):
 select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2', 'price_usd', 'promotion_flag', 'no_bookings_prop', 'no_found_prop']
 
 traindf = data.query("click_bool == 1")
-traindf = pd.concat([traindf, data.df.head(len(traindf))])
+traindf = pd.concat([traindf, data.head(len(traindf))])
 X_train_boosted, y_train_boosted = make_X_y(traindf, select_cols)
-X_train_normal, y_train_normal = make_X_y(data.df, select_cols)
+X_train_normal, y_train_normal = make_X_y(data, select_cols)
 
 X_test, y_test = make_X_y(data_test, select_cols)
 
@@ -115,7 +115,7 @@ for test in testSettings:
             else:
                 X_train = X_train_normal
                 y_train = y_train_normal
-                df = data.df
+                df = data
 
             start_time = datetime.now()
             clf.fit(X_train, y_train)
