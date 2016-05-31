@@ -13,7 +13,7 @@ def make_X(testdf, select_cols):
 print "start classfieing"
 
 model = pkl.load(open(
-    'Classifiers_result_2\gradient_boosting_Boosting-False_max_leaf_nodes-4-learning_rate-0.1-n_estimators-100-subsample-0.5-random_state-2-min_samples_split-5-max_depth-None.pkl',
+    'Classifiers_final\gradient_boosting_Boosting-False_max_leaf_nodes-4-learning_rate-0.1-n_estimators-100-subsample-0.5-random_state-2-min_samples_split-5-max_depth-None.pkl',
     'r'))
 
 select_cols = ['prop_starrating', 'prop_review_score', 'prop_location_score2', 'price_usd',
@@ -25,6 +25,7 @@ slices_to_do = range(17,25)
 for i in slices_to_do:
     data_file = "data/test_set_added_variables_%i.csv" % (i)
     data_test_slice = dp.DataAggregator(data_file)
+    data_test_slice.read_data()
     data_test_df = data_test_slice.df
 
     X_test = make_X(data_test_df, select_cols)
