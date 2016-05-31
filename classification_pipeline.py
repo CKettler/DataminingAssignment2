@@ -45,39 +45,41 @@ X_test, y_test = make_X_y(data_test, select_cols)
 testSettings = [ {'method': 'gradient_boosting',
                  'original_params': {'n_estimators': 10, 'max_leaf_nodes': 4, 'max_depth': None, 'random_state': 2,
                                      'min_samples_split': 5},
-                 'param_variants': [{'learning_rate': 1.0, 'subsample': 1.0},
-                                    {'learning_rate': 0.1, 'subsample': 1.0},
-                                    {'learning_rate': 1.0, 'subsample': 0.5},
-                                    {'learning_rate': 0.1, 'subsample': 0.5},
-                                    {'learning_rate': 0.1, 'max_features': 2},
-                                    {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 1.0},
-                                    {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 1.0},
-                                    {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 0.5},
-                                    {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 0.5},
-                                    {'n_estimators': 100, 'learning_rate': 0.1, 'max_features': 2}]
-                 },
-                {'method': 'adaboost',
-                 'original_params': {'n_estimators': 1000, 'learning_rate': 1},
-                 'param_variants': [{'learning_rate': 0.5},
-                                    {'learning_rate': 0.5},
-                                    {'learning_rate': 0.1},
-                                    {'n_estimators': 100, 'learning_rate': 0.5},
-                                    {'n_estimators': 100, 'learning_rate': 0.5},
-                                    {'n_estimators': 100, 'learning_rate': 0.1}]
-                 },
-                {'method': 'randomforest',
-                 'original_params': {'n_estimators': 10, 'max_depth': None},
-                 'param_variants': [{'n_estimators': 10},
-                                    {'n_estimators': 10, 'max_depth': 20},
-                                    {'n_estimators': 10, 'max_depth': 5},
-                                    {'n_estimators': 100},
-                                    {'n_estimators': 100, 'max_depth': 20},
-                                    {'n_estimators': 100, 'max_depth': 5}]
-                 },
-                {'method': 'dummy',
-                 'original_params': {},
-                 'param_variants': [{}]
-                 }
+                 'param_variants': [
+                                    # {'learning_rate': 1.0, 'subsample': 1.0},
+                                    # {'learning_rate': 0.1, 'subsample': 1.0},
+                                    # {'learning_rate': 1.0, 'subsample': 0.5},
+                                    # {'learning_rate': 0.1, 'subsample': 0.5},
+                                    # {'learning_rate': 0.1, 'max_features': 2},
+                                    # {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 1.0},
+                                    # {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 1.0},
+                                    # {'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 0.5},
+                                    # {'n_estimators': 100, 'learning_rate': 0.1, 'max_features': 2},
+                                    {'n_estimators': 100, 'learning_rate': 0.1, 'subsample': 0.5}
+                                    ]
+                 }#,
+                # {'method': 'adaboost',
+                #  'original_params': {'n_estimators': 1000, 'learning_rate': 1},
+                #  'param_variants': [{'learning_rate': 0.5},
+                #                     {'learning_rate': 0.5},
+                #                     {'learning_rate': 0.1},
+                #                     {'n_estimators': 100, 'learning_rate': 0.5},
+                #                     {'n_estimators': 100, 'learning_rate': 0.5},
+                #                     {'n_estimators': 100, 'learning_rate': 0.1}]
+                #  },
+                # {'method': 'randomforest',
+                #  'original_params': {'n_estimators': 10, 'max_depth': None},
+                #  'param_variants': [{'n_estimators': 10},
+                #                     {'n_estimators': 10, 'max_depth': 20},
+                #                     {'n_estimators': 10, 'max_depth': 5},
+                #                     {'n_estimators': 100},
+                #                     {'n_estimators': 100, 'max_depth': 20},
+                #                     {'n_estimators': 100, 'max_depth': 5}]
+                #  },
+                # {'method': 'dummy',
+                #  'original_params': {},
+                #  'param_variants': [{}]
+                #  }
                 ]
 
 f = open('classif-%s.csv' % (datetime.now().strftime("%d%m%y%H%M%S")), 'w')
